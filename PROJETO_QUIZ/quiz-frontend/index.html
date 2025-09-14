@@ -218,7 +218,7 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
         clientId = playerName; // Guarda o nome do jogador atual
-        socket = new WebSocket(`ws://localhost:8000/ws/${roomId}/${playerName}`);
+        socket = new WebSocket(`wss://quiz-server-israel.onrender.com/ws/${roomId}/${playerName}`);
 
         socket.onopen = () => {
             if (customQuestions.length > 0) {
