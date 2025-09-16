@@ -66,19 +66,15 @@ default_questions: List[Dict] = [
 ]
 TIME_PER_QUESTION = 30
 WINNING_SCORE = 100
+PENALTY_POINTS = 5
 
 # --- Funções Auxiliares do Jogo ---
 def create_new_game_state(room_id: str):
     if room_id not in game_states:
         game_states[room_id] = {
-            "players": {},
-            "scores": {},
-            "questions": list(default_questions),
-            "custom_questions_pool": [], # Para guardar as perguntas dos jogadores
-            "current_question": None,
-            "current_player_index": 0,
-            "timer_task": None,
-            "game_started": False
+            "players": {}, "scores": {}, "questions": list(default_questions),
+            "custom_questions_pool": [], "current_question": None, "current_player_index": 0,
+            "timer_task": None, "game_started": False
         }
 
 async def start_game(room_id: str):
@@ -91,10 +87,8 @@ async def next_turn(room_id: str, new_game: bool = False):
     if room_id not in game_states: return
     state = game_states[room_id]
     
-    if state["timer_task"]:
-        state["timer_task"].cancel()
+    if state["timer_task"]: state["timer_task"].cancel()
 
-    # Verifica se há um vencedor ANTES de continuar
     for player_id, score in state["scores"].items():
         if score >= WINNING_SCORE:
             await manager.broadcast(room_id, {"type": "gameOver", "winner": player_id})
@@ -104,8 +98,6 @@ async def next_turn(room_id: str, new_game: bool = False):
     if not new_game:
         state["current_player_index"] = (state["current_player_index"] + 1) % len(state["players"])
     
-    # *** ESTA É A MUDANÇA PRINCIPAL ***
-    # Se acabaram as perguntas, recarrega a lista para o jogo continuar.
     if not state["questions"]:
         print(f"Sala {room_id}: Recarregando perguntas...")
         state["questions"] = list(default_questions) + list(state["custom_questions_pool"])
@@ -122,6 +114,15 @@ async def timer(room_id: str):
         await asyncio.sleep(TIME_PER_QUESTION)
         if room_id in game_states:
             print(f"Sala {room_id}: Tempo esgotado! Próximo turno.")
+            
+            # <<< NOVA LÓGICA DE PENALIDADE POR TEMPO ESGOTADO >>>
+            state = game_states[room_id]
+            players_list = list(state["players"].keys())
+            if players_list:
+                current_player_id = players_list[state["current_player_index"]]
+                # Garante que o placar não fique negativo
+                state["scores"][current_player_id] = max(0, state["scores"][current_player_id] - PENALTY_POINTS)
+            
             await next_turn(room_id)
     except asyncio.CancelledError:
         pass
@@ -129,10 +130,8 @@ async def timer(room_id: str):
 def get_public_state(room_id: str):
     state = game_states.get(room_id, {})
     return {
-        "players": state.get("players", {}),
-        "scores": state.get("scores", {}),
-        "current_question": state.get("current_question"),
-        "current_player_index": state.get("current_player_index", 0),
+        "players": state.get("players", {}), "scores": state.get("scores", {}),
+        "current_question": state.get("current_question"), "current_player_index": state.get("current_player_index", 0),
         "timeRemaining": state.get("timeRemaining")
     }
 
@@ -173,6 +172,11 @@ async def websocket_endpoint(websocket: WebSocket, room_id: str, client_id: str)
                 if client_id == current_player_id:
                     if message["answer"] == state["current_question"]["correctAnswer"]:
                         state["scores"][client_id] += 10
+                    else:
+                        # <<< NOVA LÓGICA DE PENALIDADE POR RESPOSTA ERRADA >>>
+                        # Garante que o placar não fique negativo
+                        state["scores"][client_id] = max(0, state["scores"][client_id] - PENALTY_POINTS)
+                    
                     await next_turn(room_id)
                     
     except WebSocketDisconnect:
@@ -187,7 +191,5 @@ async def websocket_endpoint(websocket: WebSocket, room_id: str, client_id: str)
                  await manager.broadcast(room_id, {"type": "gameOver", "winner": "Jogo encerrado por falta de jogadores"})
                  if room_id in game_states: del game_states[room_id]
             else:
-                # Recalcula o índice do jogador atual para não dar erro
-                if state["players"]:
-                    state["current_player_index"] %= len(state["players"])
+                if state["players"]: state["current_player_index"] %= len(state["players"])
                 await manager.broadcast(room_id, {"type": "gameStateUpdate", "state": get_public_state(room_id)})

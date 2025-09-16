@@ -130,33 +130,26 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-    // Referências do DOM
     const screens = {
-        welcome: document.getElementById('welcome-screen'),
-        create: document.getElementById('create-room-screen'),
-        join: document.getElementById('join-room-screen'),
-        game: document.getElementById('game-screen'),
+        welcome: document.getElementById('welcome-screen'), create: document.getElementById('create-room-screen'),
+        join: document.getElementById('join-room-screen'), game: document.getElementById('game-screen'),
         gameOver: document.getElementById('game-over-screen')
     };
     
-    // Botões de navegação inicial
     document.getElementById('show-create-btn').addEventListener('click', () => switchScreen('create'));
     document.getElementById('show-join-btn').addEventListener('click', () => switchScreen('join'));
     document.querySelectorAll('.btn-back').forEach(btn => btn.addEventListener('click', () => switchScreen('welcome')));
 
-    // Elementos da tela de CRIAR
     const createRoomIdInput = document.getElementById('create-room-id');
     const createPlayerNameInput = document.getElementById('create-player-name');
     const addQuestionBtn = document.getElementById('add-question-btn');
     const customQuestionsList = document.getElementById('custom-questions-list');
     const createGameBtn = document.getElementById('create-game-btn');
     
-    // Elementos da tela de ENTRAR
     const joinRoomIdInput = document.getElementById('join-room-id');
     const joinPlayerNameInput = document.getElementById('join-player-name');
     const joinGameBtn = document.getElementById('join-game-btn');
 
-    // Elementos do Jogo
     const scoreboard = document.getElementById('scoreboard');
     const timerDisplay = document.getElementById('timer-display');
     const questionText = document.getElementById('question-text');
@@ -166,75 +159,57 @@ document.addEventListener('DOMContentLoaded', () => {
     const restartGameBtn = document.getElementById('restart-game-btn');
     const quitGameBtn = document.getElementById('quit-game-btn');
 
-    // Estado do Cliente
-    let socket;
-    let clientId;
-    let customQuestionsBuffer = [];
-    let timerInterval;
+    let socket, clientId, customQuestionsBuffer = [], timerInterval;
     
     function switchScreen(screenName) {
         Object.values(screens).forEach(screen => screen.classList.remove('active'));
         screens[screenName].classList.add('active');
     }
 
-    // Lógica para adicionar perguntas customizadas (na tela de criar sala)
     addQuestionBtn.addEventListener('click', () => {
-        const qInput = document.getElementById('custom-question');
-        const correctInput = document.getElementById('custom-answer-correct');
+        const qInput = document.getElementById('custom-question'), correctInput = document.getElementById('custom-answer-correct');
         const incorrectInputs = [document.getElementById('custom-answer-incorrect1'), document.getElementById('custom-answer-incorrect2'), document.getElementById('custom-answer-incorrect3')];
         const diffSelect = document.getElementById('custom-difficulty');
-        
         const question = qInput.value.trim(), correctAnswer = correctInput.value.trim();
         const incorrectAnswers = incorrectInputs.map(i => i.value.trim()).filter(Boolean);
-
         if (question && correctAnswer && incorrectAnswers.length > 0) {
             customQuestionsBuffer.push({ question, options: [...incorrectAnswers, correctAnswer], correctAnswer, difficulty: diffSelect.value });
             const li = document.createElement('li');
             li.textContent = `[${diffSelect.value}] ${question}`;
             customQuestionsList.appendChild(li);
             [qInput, correctInput, ...incorrectInputs].forEach(i => i.value = '');
-        } else {
-            alert('Preencha a pergunta, a resposta correta e pelo menos uma incorreta.');
-        }
+        } else { alert('Preencha a pergunta, a resposta correta e pelo menos uma incorreta.'); }
     });
 
-    // Event listeners para os botões de criar e entrar
     createGameBtn.addEventListener('click', () => {
-        const roomId = createRoomIdInput.value.trim();
-        const playerName = createPlayerNameInput.value.trim();
+        const roomId = createRoomIdInput.value.trim(), playerName = createPlayerNameInput.value.trim();
         connectToGame(roomId, playerName, customQuestionsBuffer);
     });
-
     joinGameBtn.addEventListener('click', () => {
-        const roomId = joinRoomIdInput.value.trim();
-        const playerName = joinPlayerNameInput.value.trim();
-        connectToGame(roomId, playerName, []); // Entra sem perguntas customizadas
+        const roomId = joinRoomIdInput.value.trim(), playerName = joinPlayerNameInput.value.trim();
+        connectToGame(roomId, playerName, []);
     });
 
-    // Função central para conectar ao jogo
     function connectToGame(roomId, playerName, customQuestions) {
-        if (!roomId || !playerName) {
-            alert('Por favor, preencha o nome da sala e seu nome.');
-            return;
-        }
-        clientId = playerName; // Guarda o nome do jogador atual
-        socket = new WebSocket(`wss://quiz-server-israel.onrender.com/ws/${roomId}/${playerName}`);
-
+        if (!roomId || !playerName) { alert('Por favor, preencha o nome da sala e seu nome.'); return; }
+        clientId = playerName;
+        socket = new WebSocket(`ws://localhost:8000/ws/${roomId}/${playerName}`);
         socket.onopen = () => {
             if (customQuestions.length > 0) {
                 socket.send(JSON.stringify({ type: 'addCustomQuestions', questions: customQuestions }));
-                customQuestionsBuffer = []; // Limpa o buffer após enviar
+                customQuestionsBuffer = [];
             }
         };
-
         socket.onmessage = (event) => {
             const message = JSON.parse(event.data);
             switch (message.type) {
-                case 'gameStateUpdate': updateUI(message.state); break;
+                case 'gameStateUpdate': 
+                                        
+                    updateUI(message.state); 
+                    break;
                 case 'gameOver': displayWinner(message.winner); break;
             }
         };
-
         socket.onerror = (error) => { console.error("Erro no WebSocket:", error); alert("Não foi possível conectar ao servidor."); };
     }
     
@@ -248,35 +223,27 @@ document.addEventListener('DOMContentLoaded', () => {
     function updateUI(state) {
         if (!screens.game.classList.contains('active')) { switchScreen('game'); }
         stopTimer();
-        
         scoreboard.innerHTML = '';
         const playersList = Object.keys(state.players);
         playersList.forEach((pId, index) => {
             const scoreDiv = document.createElement('div');
             scoreDiv.className = 'player-score';
             if (index === state.current_player_index) { scoreDiv.classList.add('active'); }
-            scoreDiv.innerHTML = `<h3 class="name">${pId}</h3><p class="score">${state.scores[pId]}</h3>`;
+            scoreDiv.innerHTML = `<h3 class="name">${pId}</h3><p class="score">${state.scores[pId]}</p>`;
             scoreboard.appendChild(scoreDiv);
         });
-
-        const question = state.current_question;
-        const currentPlayerId = playersList[state.current_player_index];
-
+        const question = state.current_question, currentPlayerId = playersList[state.current_player_index];
         if (question) {
             questionText.textContent = question.question;
             questionDifficulty.textContent = `Dificuldade: ${question.difficulty}`;
             answerOptionsContainer.innerHTML = '';
-            
             const shuffledOptions = [...question.options].sort(() => Math.random() - 0.5);
             shuffledOptions.forEach(option => {
                 const button = document.createElement('button');
                 button.textContent = option;
                 button.className = 'option-btn';
-                if (clientId === currentPlayerId) {
-                    button.onclick = () => sendAnswer(option);
-                } else {
-                    button.disabled = true;
-                }
+                if (clientId === currentPlayerId) { button.onclick = () => sendAnswer(option); } 
+                else { button.disabled = true; }
                 answerOptionsContainer.appendChild(button);
             });
             startTimer(state.timeRemaining);
@@ -289,24 +256,16 @@ document.addEventListener('DOMContentLoaded', () => {
     function sendAnswer(answer) {
         if (socket) { socket.send(JSON.stringify({ type: 'submitAnswer', answer: answer })); }
     }
-
     function startTimer(startTime) {
         let timer = startTime || 30;
         timerDisplay.textContent = timer;
-        timerInterval = setInterval(() => {
-            timer--;
-            timerDisplay.textContent = timer;
-            if (timer <= 0) stopTimer();
-        }, 1000);
+        timerInterval = setInterval(() => { timer--; timerDisplay.textContent = timer; if (timer <= 0) stopTimer(); }, 1000);
     }
-
     function stopTimer() { clearInterval(timerInterval); }
-
     function displayWinner(winnerId) {
         winnerName.textContent = winnerId || "Empate!";
         switchScreen('gameOver');
     }
-
     restartGameBtn.addEventListener('click', () => {
         if(socket) socket.close();
         customQuestionsList.innerHTML = ''; 
