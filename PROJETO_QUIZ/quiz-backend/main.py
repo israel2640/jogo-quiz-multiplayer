@@ -1,10 +1,26 @@
 import asyncio
 import json
 import random
+import database
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi import FastAPI, WebSocket, WebSocketDisconnect
 from typing import Dict, List, Any
 
 app = FastAPI()
+
+origins = ["*"]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+@app.on_event("startup")
+def on_startup():
+    database.init_db()
 
 class ConnectionManager:
     def __init__(self):
@@ -83,6 +99,22 @@ async def start_game(room_id: str):
         state["game_started"] = True
         await next_turn(room_id, new_game=True)
 
+async def end_game_and_save_scores(room_id: str, winner: str):
+    """Finaliza o jogo, salva os scores e avisa os jogadores."""
+    state = game_states.get(room_id)
+    if not state: return
+
+    print(f"Fim de jogo na sala {room_id}. Salvando pontuações...")
+    for player_id, score in state["scores"].items():
+        if score > 0:
+            database.update_player_score(player_id, score)
+
+    await manager.broadcast(room_id, {"type": "gameOver", "winner": winner})
+    if room_id in game_states:
+        if game_states[room_id].get("timer_task"):
+            game_states[room_id]["timer_task"].cancel()
+        del game_states[room_id]
+
 async def next_turn(room_id: str, new_game: bool = False):
     if room_id not in game_states: return
     state = game_states[room_id]
@@ -91,8 +123,7 @@ async def next_turn(room_id: str, new_game: bool = False):
 
     for player_id, score in state["scores"].items():
         if score >= WINNING_SCORE:
-            await manager.broadcast(room_id, {"type": "gameOver", "winner": player_id})
-            if room_id in game_states: del game_states[room_id]
+            await end_game_and_save_scores(room_id, player_id)
             return
 
     if not new_game:
@@ -134,6 +165,11 @@ def get_public_state(room_id: str):
         "current_question": state.get("current_question"), "current_player_index": state.get("current_player_index", 0),
         "timeRemaining": state.get("timeRemaining")
     }
+
+@app.get("/ranking")
+def get_ranking_data():
+    """Endpoint HTTP para que o front-end possa buscar os dados do ranking."""
+    return database.get_ranking()
 
 @app.websocket("/ws/{room_id}/{client_id}")
 async def websocket_endpoint(websocket: WebSocket, room_id: str, client_id: str):
@@ -188,8 +224,7 @@ async def websocket_endpoint(websocket: WebSocket, room_id: str, client_id: str)
             if client_id in state["scores"]: del state["scores"][client_id]
 
             if len(state["players"]) < 2 and state["game_started"]:
-                 await manager.broadcast(room_id, {"type": "gameOver", "winner": "Jogo encerrado por falta de jogadores"})
-                 if room_id in game_states: del game_states[room_id]
+                 await end_game_and_save_scores(room_id, "Jogo encerrado por falta de jogadores")
             else:
                 if state["players"]: state["current_player_index"] %= len(state["players"])
                 await manager.broadcast(room_id, {"type": "gameStateUpdate", "state": get_public_state(room_id)})
