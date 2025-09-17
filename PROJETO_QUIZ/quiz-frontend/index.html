@@ -259,6 +259,7 @@
     <audio id="sound-wrong" src="erro.mp3" preload="auto"></audio>
     <audio id="sound-tick" src="tick.mp3" preload="auto"></audio>
     <audio id="sound-victory" src="vitoria.mp3" preload="auto"></audio>
+    <audio id="sound-disconnect" src="disconnect.mp3" preload="auto"></audio>
 
 <script>
 // Todo o JavaScript permanece o mesmo. Nenhuma alteração é necessária aqui.
@@ -271,7 +272,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const soundCorrect = document.getElementById('sound-correct'), 
       soundWrong = document.getElementById('sound-wrong'), 
       soundTick = document.getElementById('sound-tick'),
-      soundVictory = document.getElementById('sound-victory');
+      soundVictory = document.getElementById('sound-victory'),
+      soundDisconnect = document.getElementById('sound-disconnect');
     
     const rulesModal = document.getElementById('rules-modal'), rankingModal = document.getElementById('ranking-modal');
     const showCreateBtn = document.getElementById('show-create-btn'), showJoinBtn = document.getElementById('show-join-btn'),
@@ -407,6 +409,7 @@ document.addEventListener('DOMContentLoaded', () => {
             trophyImg.style.display = 'none';
             victorySoundIcon.style.display = 'none'; // Garante que o ícone fique escondido
             winnerName.textContent = 'Um jogador se desconectou';
+            playSound(soundDisconnect);
         } else {
             gameOverTitle.textContent = 'Vitória!';
             trophyImg.style.display = 'block';
