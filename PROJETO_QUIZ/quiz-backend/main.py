@@ -910,6 +910,8 @@ async def websocket_endpoint(websocket: WebSocket, room_id: str, client_id: str)
                 current_player_id = players_list[state["current_player_index"]]
                 
                 if client_id == current_player_id:
+                    if state.get("timer_task"):
+                        state["timer_task"].cancel()
                     is_correct = message["answer"] == state["current_question"]["correctAnswer"]
                     await manager.broadcast(room_id, {"type": "answerResult", "correctAnswer": state["current_question"]["correctAnswer"], "selectedAnswer": message["answer"]})
                     
@@ -935,6 +937,8 @@ async def websocket_endpoint(websocket: WebSocket, room_id: str, client_id: str)
 
             # CONDIÇÃO 1: O jogo estava em andamento e agora não há jogadores suficientes.
             if state["game_started"] and len(state["players"]) < 2:
+                if state.get("timer_task"):
+                    state["timer_task"].cancel()
                 await end_game_and_save_scores(room_id, "Jogo encerrado por desconexão")
                 return  # Encerra o jogo e a função
 

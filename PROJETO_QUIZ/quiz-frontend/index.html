@@ -370,9 +370,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function displayWinner(winnerId) {
         stopTimer();
-        winnerName.textContent = winnerId || "Empate!";
+
+        // NOVO: Referências para os elementos da tela de fim de jogo
+        const gameOverTitle = document.querySelector('#game-over-screen h1');
+        const trophyImg = document.querySelector('#game-over-screen .winner-trophy');
+
+        // NOVO: Lógica para verificar o motivo do fim do jogo
+        if (winnerId && winnerId.includes('desconexão')) {
+            // Se o jogo terminou por desconexão
+            gameOverTitle.textContent = 'Fim de Jogo'; // Altera o título
+            trophyImg.style.display = 'none'; // Esconde o troféu
+            winnerName.textContent = 'Um jogador se desconectou'; // Mensagem mais clara
+        } else {
+            // Se for uma vitória ou empate normal
+            gameOverTitle.textContent = 'Vitória!'; // Garante o título de vitória
+            trophyImg.style.display = 'block'; // Garante que o troféu esteja visível
+            winnerName.textContent = winnerId || "Empate!";
+            startConfetti(); // Inicia os confetes apenas em caso de vitória
+        }
+
         switchScreen('gameOver');
-        startConfetti();
     }
 
     function startConfetti() {
