@@ -1,709 +1,539 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quiz Multiplayer Online</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
-
         :root {
-            --primary-color: #4a90e2;
-            --secondary-color: #f5f7fa;
-            --dark-color: #333;
-            --light-color: #fff;
-            --success-color: #50e3c2;
-            --error-color: #e35050;
-            --warning-color: #f5a623;
-            --border-radius: 8px;
-            --shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            --primary-color: #4a90e2; --secondary-color: #f5f7fa;
+            --dark-color: #333; --light-color: #fff; --success-color: #50e3c2;
+            --error-color: #e35050; --warning-color: #f5a623; --gold-color: #ffd700;
+            --border-radius: 8px; --shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
         }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            font-family: 'Poppins', sans-serif;
-            background-color: var(--secondary-color);
-            color: var(--dark-color);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            padding: 20px;
+            font-family: 'Poppins', sans-serif; background-color: var(--secondary-color);
+            color: var(--dark-color); display: flex; justify-content: center;
+            align-items: center; min-height: 100vh; padding: 20px;
         }
-
         .container {
-            width: 100%;
-            max-width: 900px;
-            background-color: var(--light-color);
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow);
-            overflow: hidden;
+            width: 100%; max-width: 900px; background-color: var(--light-color);
+            border-radius: var(--border-radius); box-shadow: var(--shadow);
+            overflow: hidden; position: relative;
+            min-height: 600px;
         }
-
         .screen {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
             padding: 40px;
             display: none;
+            overflow-y: auto;
         }
-
         .screen.active {
             display: block;
         }
 
-        header {
-            text-align: center;
-            margin-bottom: 30px;
+        header { text-align: center; margin-bottom: 30px; }
+        h1 { color: var(--primary-color); font-weight: 700; font-size: 2.5rem; }
+        h1 span { font-weight: 300; color: var(--dark-color); }
+        h2 { font-weight: 600; margin-bottom: 20px; border-bottom: 2px solid var(--primary-color); padding-bottom: 10px; }
+        h3 { margin-bottom: 15px; font-weight: 600; text-align: center;}
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; margin-bottom: 5px; font-weight: 600; }
+        input[type="text"], select {
+            width: 100%; padding: 12px; border: 1px solid #ccc;
+            border-radius: var(--border-radius); font-family: 'Poppins', sans-serif;
+            font-size: 1rem; transition: border-color 0.3s; margin-bottom: 10px;
         }
-
-        h1 {
-            color: var(--primary-color);
-            font-weight: 700;
-            font-size: 2.5rem;
-        }
-
-        h1 span {
-            font-weight: 300;
-            color: var(--dark-color);
-        }
-
-        h2 {
-            font-weight: 600;
-            margin-bottom: 20px;
-            border-bottom: 2px solid var(--primary-color);
-            padding-bottom: 10px;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: 600;
-        }
-
-        input[type="text"],
-        select {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ccc;
-            border-radius: var(--border-radius);
-            font-family: 'Poppins', sans-serif;
-            font-size: 1rem;
-            transition: border-color 0.3s;
-        }
-
-        input[type="text"]:focus,
-        select:focus {
-            outline: none;
-            border-color: var(--primary-color);
-        }
-
-        .input-correct {
-            border-left: 5px solid var(--success-color);
-        }
-
-        .input-incorrect {
-            border-left: 5px solid var(--error-color);
-        }
-
         .btn {
-            display: inline-block;
-            padding: 12px 25px;
-            border: none;
-            border-radius: var(--border-radius);
-            cursor: pointer;
-            font-family: 'Poppins', sans-serif;
-            font-size: 1rem;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            text-align: center;
+            display: inline-block; padding: 12px 25px; border: none;
+            border-radius: var(--border-radius); cursor: pointer; font-family: 'Poppins', sans-serif;
+            font-size: 1rem; font-weight: 600; transition: all 0.3s ease; text-align: center;
         }
-
-        .btn-primary {
-            background-color: var(--primary-color);
-            color: var(--light-color);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(74, 144, 226, 0.4);
-        }
-
-        .btn-secondary {
-            background-color: #6c757d;
-            color: var(--light-color);
-        }
-
-        .btn-secondary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
-        }
-
-        .btn-full {
-            width: 100%;
-        }
-
-        .btn-back {
-            background: none;
-            border: 1px solid #ccc;
-            color: #6c757d;
-            margin-top: 15px;
-        }
-
-        .welcome-options {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-        }
-
-        .welcome-options .btn-full-grid {
-            grid-column: 1 / -1;
-            /* Faz o botão ocupar a largura toda */
-        }
-
-        #custom-questions-list {
-            list-style: none;
-            margin-top: 15px;
-        }
-
-        #custom-questions-list li {
-            background-color: var(--secondary-color);
-            padding: 10px;
-            border-radius: 5px;
-            margin-bottom: 5px;
-            font-size: 0.9rem;
-        }
-
-        #scoreboard {
-            display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
-            margin-bottom: 20px;
-            padding: 20px;
-            background-color: var(--secondary-color);
-            border-radius: var(--border-radius);
-        }
-
-        .player-score {
-            text-align: center;
-            padding: 10px 20px;
-            margin: 5px;
-            border-radius: var(--border-radius);
-            transition: all 0.3s ease;
-        }
-
-        .player-score.active {
-            background-color: var(--success-color);
-            transform: scale(1.1);
-        }
-
-        .player-score .name {
-            font-weight: 600;
-            font-size: 1.2rem;
-        }
-
-        .player-score .score {
-            font-size: 2rem;
-            font-weight: 700;
-        }
-
-        #timer-display {
-            text-align: center;
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--primary-color);
-            margin-bottom: 20px;
-            height: 40px;
-        }
-
-        #question-area {
-            margin-bottom: 20px;
-        }
-
-        #question-text {
-            font-size: 1.4rem;
-            margin-bottom: 10px;
-            min-height: 80px;
-        }
-
-        #question-difficulty {
-            font-style: italic;
-            color: #6c757d;
-        }
-
-        #answer-options {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 15px;
-            margin-top: 20px;
-        }
-
-        .option-btn {
-            padding: 15px;
-            background: var(--light-color);
-            border: 2px solid var(--primary-color);
-            color: var(--primary-color);
-            border-radius: var(--border-radius);
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 1rem;
-            font-weight: 600;
-        }
-
-        .option-btn:hover:not(:disabled) {
-            background: var(--primary-color);
-            color: var(--light-color);
-        }
-
-        .option-btn:disabled {
-            cursor: not-allowed;
-            opacity: 0.7;
-        }
-
-        #winner-declaration {
-            text-align: center;
-        }
-
-        #winner-name {
-            font-size: 3rem;
-            font-weight: 700;
-            color: var(--primary-color);
-            margin: 20px 0;
-        }
-
-        #game-controls {
-            margin-top: 30px;
-            padding-top: 20px;
-            border-top: 1px solid #eee;
-        }
-
-        #quit-game-btn {
-            background-color: var(--error-color);
-            width: auto;
-            display: block;
-            margin: 0 auto;
-        }
-
+        .btn-primary { background-color: var(--primary-color); color: var(--light-color); }
+        .btn-secondary { background-color: #6c757d; color: var(--light-color); }
+        .btn-danger { background-color: var(--error-color); color: var(--light-color); }
+        .btn-small { padding: 5px 10px; font-size: 0.8rem; margin-left: 10px; }
+        .btn-full { width: 100%; }
+        .btn-back { background: none; border: 1px solid #ccc; color: #6c757d; margin-top: 15px; }
+        .welcome-options { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .welcome-options .btn-full-grid { grid-column: 1 / -1; }
+        #my-questions-list { list-style: none; padding: 0; max-height: 200px; overflow-y: auto; border: 1px solid #eee; border-radius: var(--border-radius); }
+        #my-questions-list li { display: flex; justify-content: space-between; align-items: center; padding: 10px; border-bottom: 1px solid #eee; }
+        #my-questions-list li:last-child { border-bottom: none; }
         .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.6);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.3s ease, visibility 0.3s ease;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(0, 0, 0, 0.6); display: flex; justify-content: center;
+            align-items: center; opacity: 0; visibility: hidden; transition: opacity 0.3s ease, visibility 0.3s ease;
             z-index: 1000;
         }
-
-        .modal-overlay.visible {
-            opacity: 1;
-            visibility: visible;
-        }
-
+        .modal-overlay.visible { opacity: 1; visibility: visible; }
         .modal-content {
-            background-color: var(--light-color);
-            padding: 30px 40px;
-            border-radius: var(--border-radius);
-            width: 90%;
-            max-width: 600px;
-            transform: scale(0.9);
-            transition: transform 0.3s ease;
+            background-color: var(--light-color); padding: 30px 40px; border-radius: var(--border-radius);
+            width: 90%; max-width: 600px; transform: scale(0.9); transition: transform 0.3s ease;
         }
+        .modal-overlay.visible .modal-content { transform: scale(1); }
+        .modal-content h2 { text-align: center; }
+        .modal-content .close-btn { background-color: var(--error-color); margin-top: 20px; width: auto; float: right; }
+        .rules-list { list-style: none; padding: 0; }
+        .rules-list li { margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px solid #eee; font-size: 1.1rem; }
+        .ranking-list { list-style: none; padding: 0; }
+        .ranking-list li { margin-bottom: 10px; padding: 10px; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; font-size: 1.1rem;}
+        #scoreboard { display: flex; justify-content: space-around; flex-wrap: wrap; margin-bottom: 20px; padding: 20px; background-color: var(--secondary-color); border-radius: var(--border-radius); }
+        .player-score { text-align: center; padding: 10px 20px; margin: 5px; border-radius: var(--border-radius); transition: all 0.3s ease; }
+        .player-score.active { background-color: var(--success-color); transform: scale(1.1); box-shadow: 0 0 15px rgba(80, 227, 194, 0.7); }
+        .player-score .name { font-weight: 600; font-size: 1.2rem; }
+        .player-score .score { font-size: 2rem; font-weight: 700; }
+        #timer-display { text-align: center; font-size: 1.8rem; font-weight: 700; color: var(--primary-color); margin-bottom: 20px; height: 40px; }
+        #answer-options { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin-top: 20px; }
+        .option-btn { padding: 15px; background: var(--light-color); border: 2px solid var(--primary-color); color: var(--primary-color); border-radius: var(--border-radius); cursor: pointer; transition: all 0.3s ease; font-size: 1rem; font-weight: 600; }
+        .option-btn:disabled { cursor: not-allowed; opacity: 0.7; }
+        #game-controls { margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee; }
+        #quit-game-btn { background-color: var(--error-color); width: auto; display: block; margin: 0 auto; }
 
-        .modal-overlay.visible .modal-content {
-            transform: scale(1);
-        }
-
-        .modal-content h2 {
-            text-align: center;
-        }
-
-        .modal-content .close-btn {
-            background-color: var(--error-color);
-            margin-top: 20px;
-            width: auto;
-            float: right;
-        }
-
-        .rules-list {
-            list-style-position: inside;
-            padding-left: 10px;
-        }
-
-        .rules-list li {
-            margin-bottom: 10px;
-        }
-
-        .ranking-list {
-            list-style: none;
-            padding: 0;
-        }
-
-        .ranking-list li {
-            margin-bottom: 10px;
-            padding: 10px;
-            border-bottom: 1px solid #eee;
+        #game-over-screen.active {
             display: flex;
-            justify-content: space-between;
-            font-size: 1.1rem;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(135deg, var(--secondary-color) 0%, #e0eafc 100%);
         }
-
-        .ranking-list li:last-child {
-            border-bottom: none;
+        .winner-trophy {
+            animation: scaleIn 0.5s ease-out;
+            margin-bottom: -10px;
         }
-
-        .ranking-list .rank-pos {
-            font-weight: 700;
-            margin-right: 15px;
+        .winner-trophy img {
+            width: 150px;
+            height: 150px;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2));
+        }
+        #game-over-screen h1 {
+            font-size: 3rem;
+            margin: 20px 0 10px;
             color: var(--primary-color);
+            animation: fadeInUp 0.5s 0.2s ease-out backwards;
+        }
+        #winner-name {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--dark-color);
+            padding: 10px 20px;
+            background-color: var(--gold-color);
+            border-radius: var(--border-radius);
+            margin-bottom: 30px;
+            box-shadow: var(--shadow);
+            animation: fadeInUp 0.5s 0.4s ease-out backwards;
+        }
+        #restart-game-btn {
+            animation: fadeInUp 0.5s 0.6s ease-out backwards;
+        }
+        #confetti-canvas {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 0;
         }
 
-        .ranking-list .rank-score {
-            font-weight: 600;
+        @keyframes pop { 0% { transform: scale(1); } 50% { transform: scale(1.25); color: var(--success-color); } 100% { transform: scale(1); } }
+        @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-5px); } 75% { transform: translateX(5px); } }
+        .animate-pop { animation: pop 0.5s ease-out; }
+        .animate-shake { animation: shake 0.3s ease-in-out; }
+        .flash-green { background-color: var(--success-color) !important; color: var(--dark-color) !important; border-color: var(--success-color) !important; }
+        .flash-red { background-color: var(--error-color) !important; color: var(--light-color) !important; border-color: var(--error-color) !important; }
+        
+        @keyframes scaleIn {
+            from { transform: scale(0.5); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        @keyframes fadeInUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
         }
     </style>
 </head>
-
 <body>
     <div class="container">
         <div id="welcome-screen" class="screen active">
-            <header>
-                <h1>Quiz Multiplayer <span>Online</span></h1>
-                <p>O que você deseja fazer?</p>
-            </header>
+            <header><h1>Quiz Multiplayer <span>Online</span></h1><p>O que você deseja fazer?</p></header>
             <div class="welcome-options">
                 <button id="show-create-btn" class="btn btn-primary">Criar Sala</button>
                 <button id="show-join-btn" class="btn btn-secondary">Entrar em Sala</button>
-                <button id="show-ranking-btn" class="btn btn-full-grid">Ranking Global</button>
+                <button id="show-editor-btn" class="btn btn-full-grid">Editor de Perguntas</button>
+                <button id="show-ranking-btn" class="btn btn-full-grid">Ver Ranking de Anfitrião</button>
                 <button id="show-rules-btn" class="btn btn-back btn-full-grid">Ver Regras</button>
             </div>
         </div>
-
         <div id="create-room-screen" class="screen">
             <h2>Criar Nova Sala</h2>
-            <div class="form-group"><label for="create-room-id">Nome da Sala:</label><input type="text"
-                    id="create-room-id"></div>
-            <div class="form-group"><label for="create-player-name">Seu Nome:</label><input type="text"
-                    id="create-player-name"></div>
-            <hr style="margin: 30px 0; border: 1px solid var(--secondary-color);">
-            <div id="questions-setup">
-                <h2>Adicionar Perguntas (Opcional)</h2>
-                <div class="form-group"><label for="custom-question">Pergunta:</label><input type="text"
-                        id="custom-question"></div>
-                <div class="form-group"><label for="custom-answer-correct">Resposta Correta:</label><input type="text"
-                        id="custom-answer-correct" class="input-correct"></div>
-                <div class="form-group"><label for="custom-answer-incorrect1">Incorreta 1:</label><input type="text"
-                        id="custom-answer-incorrect1" class="input-incorrect"></div>
-                <div class="form-group"><label for="custom-answer-incorrect2">Incorreta 2:</label><input type="text"
-                        id="custom-answer-incorrect2" class="input-incorrect"></div>
-                <div class="form-group"><label for="custom-answer-incorrect3">Incorreta 3:</label><input type="text"
-                        id="custom-answer-incorrect3" class="input-incorrect"></div>
-                <div class="form-group"><label for="custom-difficulty">Dificuldade:</label><select
-                        id="custom-difficulty">
-                        <option value="Básico">Básico</option>
-                        <option value="Médio">Médio</option>
-                        <option value="Difícil">Difícil</option>
-                    </select></div>
-                <button id="add-question-btn" class="btn btn-secondary">Adicionar Pergunta à Lista</button>
-                <ul id="custom-questions-list"></ul>
-            </div>
-            <hr style="margin: 30px 0;">
+            <div class="form-group"><label for="create-room-id">Nome da Sala:</label><input type="text" id="create-room-id"></div>
+            <div class="form-group"><label for="create-player-name">Seu Nome (Anfitrião):</label><input type="text" id="create-player-name"></div>
             <button id="create-game-btn" class="btn btn-primary btn-full">Criar e Entrar no Jogo</button>
             <button class="btn btn-back">Voltar</button>
         </div>
-
         <div id="join-room-screen" class="screen">
             <h2>Entrar em Sala Existente</h2>
-            <div class="form-group"><label for="join-room-id">Nome da Sala:</label><input type="text" id="join-room-id">
-            </div>
-            <div class="form-group"><label for="join-player-name">Seu Nome:</label><input type="text"
-                    id="join-player-name"></div>
+            <div class="form-group"><label for="join-room-id">Nome da Sala:</label><input type="text" id="join-room-id"></div>
+            <div class="form-group"><label for="join-player-name">Seu Nome:</label><input type="text" id="join-player-name"></div>
             <button id="join-game-btn" class="btn btn-primary btn-full">Entrar no Jogo</button>
             <button class="btn btn-back">Voltar</button>
         </div>
-
-        <div id="game-screen" class="screen">
-            <div id="scoreboard"></div>
-            <div id="timer-display"></div>
-            <div id="question-area">
-                <p id="question-difficulty"></p>
-                <h2 id="question-text"></h2>
-            </div>
-            <div id="answer-options"></div>
-            <div id="game-controls"> <button id="quit-game-btn" class="btn">Desistir da Partida</button> </div>
+        <div id="editor-screen" class="screen">
+            <h2>Editor de Perguntas</h2>
+            <div class="form-group"><label for="editor-player-name">Seu Nome de Criador</label><input type="text" id="editor-player-name" placeholder="Digite seu nome e pressione Enter"></div><hr>
+            <h3>Minhas Perguntas Salvas</h3>
+            <ul id="my-questions-list"></ul><hr>
+            <h3>Adicionar / Editar Pergunta</h3>
+            <input type="hidden" id="question-id">
+            <input type="text" id="question-text-input" placeholder="Texto da pergunta">
+            <input type="text" id="correct-answer-input" placeholder="Resposta Correta">
+            <input type="text" id="incorrect-answer-1-input" placeholder="Incorreta 1"><input type="text" id="incorrect-answer-2-input" placeholder="Incorreta 2"><input type="text" id="incorrect-answer-3-input" placeholder="Incorreta 3">
+            <select id="difficulty-input"><option value="Básico">Básico</option><option value="Médio">Médio</option><option value="Difícil">Difícil</option></select>
+            <button id="save-question-btn" class="btn btn-primary">Salvar Pergunta</button>
+            <button id="cancel-edit-btn" class="btn" style="display: none;">Cancelar Edição</button>
+            <button class="btn btn-back">Voltar</button>
         </div>
-
+        <div id="game-screen" class="screen">
+             <div id="scoreboard"></div><div id="timer-display"></div>
+             <div id="question-area"><p id="question-difficulty"></p><h2 id="question-text"></h2></div>
+             <div id="answer-options"></div>
+             <div id="game-controls"><button id="quit-game-btn" class="btn">Desistir da Partida</button></div>
+        </div>
+        
         <div id="game-over-screen" class="screen">
-            <header>
-                <h1>Fim de Jogo!</h1>
-            </header>
-            <div id="winner-declaration">
-                <h2>O vencedor é...</h2>
-                <p id="winner-name"></p>
+            <canvas id="confetti-canvas"></canvas>
+            <div class="winner-trophy">
+                <img src="trofeu.png" alt="Troféu da Vitória">
             </div>
+            <h1>Vitória!</h1>
+            <p id="winner-name">Nome do Jogador</p>
             <button id="restart-game-btn" class="btn btn-primary btn-full">Voltar ao Início</button>
         </div>
     </div>
 
-    </div>
     <div id="rules-modal" class="modal-overlay">
         <div class="modal-content">
             <h2>Regras do Jogo</h2>
             <ul class="rules-list">
                 <li><strong>Objetivo:</strong> Ser o primeiro a atingir <strong>100 pontos</strong> em uma partida para vencer.</li>
-                <li><strong>Ranking:</strong> Ao final de cada partida, sua pontuação (se for maior que zero) é somada ao seu total no Ranking Global.</li>
+                <li><strong>Ranking:</strong> Ao final de cada partida, sua pontuação (se for maior que zero) é somada ao seu total no Ranking do anfitrião da sala.</li>
                 <li><strong>Pontuação:</strong> Resposta correta vale <strong>+10 pontos</strong>. Resposta errada ou não responder a tempo resulta em <strong>-5 pontos</strong> (a pontuação mínima é 0).</li>
-                <li><strong>Tempo:</strong> Cada jogador tem <strong>30 segundos</strong> para responder à sua pergunta.</li>
-                <li><strong>Perguntas Customizadas:</strong> O criador da sala pode adicionar perguntas extras.</li>
             </ul>
             <button id="close-rules-btn" class="btn close-btn">Fechar</button>
         </div>
     </div>
-
     <div id="ranking-modal" class="modal-overlay">
         <div class="modal-content">
-            <h2>🏆 Ranking Global 🏆</h2>
-            <ul id="ranking-list" class="ranking-list">
-            </ul>
+            <h2 id="ranking-title">🏆 Ranking 🏆</h2>
+            <ul id="ranking-list" class="ranking-list"></ul>
             <button id="close-ranking-btn" class="btn close-btn">Fechar</button>
         </div>
     </div>
+    <audio id="sound-correct" src="acerto.mp3" preload="auto"></audio>
+    <audio id="sound-wrong" src="erro.mp3" preload="auto"></audio>
+    <audio id="sound-tick" src="tick.mp3" preload="auto"></audio>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // ==================================================
-            // 1. REFERÊNCIAS A TODOS OS ELEMENTOS DO DOM
-            // ==================================================
-            const screens = {
-                welcome: document.getElementById('welcome-screen'),
-                create: document.getElementById('create-room-screen'),
-                join: document.getElementById('join-room-screen'),
-                game: document.getElementById('game-screen'),
-                gameOver: document.getElementById('game-over-screen')
-            };
+<script>
+// Todo o JavaScript permanece o mesmo. Nenhuma alteração é necessária aqui.
+document.addEventListener('DOMContentLoaded', () => {
+    const screens = {
+        welcome: document.getElementById('welcome-screen'), create: document.getElementById('create-room-screen'),
+        join: document.getElementById('join-room-screen'), editor: document.getElementById('editor-screen'),
+        game: document.getElementById('game-screen'), gameOver: document.getElementById('game-over-screen')
+    };
+    const soundCorrect = document.getElementById('sound-correct'), soundWrong = document.getElementById('sound-wrong'), soundTick = document.getElementById('sound-tick');
+    const rulesModal = document.getElementById('rules-modal'), rankingModal = document.getElementById('ranking-modal');
+    const showCreateBtn = document.getElementById('show-create-btn'), showJoinBtn = document.getElementById('show-join-btn'),
+          showRulesBtn = document.getElementById('show-rules-btn'), showRankingBtn = document.getElementById('show-ranking-btn'),
+          showEditorBtn = document.getElementById('show-editor-btn'), closeRulesBtn = document.getElementById('close-rules-btn'),
+          closeRankingBtn = document.getElementById('close-ranking-btn'), backBtns = document.querySelectorAll('.btn-back');
+    const createRoomIdInput = document.getElementById('create-room-id'), createPlayerNameInput = document.getElementById('create-player-name'), createGameBtn = document.getElementById('create-game-btn');
+    const joinRoomIdInput = document.getElementById('join-room-id'), joinPlayerNameInput = document.getElementById('join-player-name'), joinGameBtn = document.getElementById('join-game-btn');
+    const scoreboard = document.getElementById('scoreboard'), timerDisplay = document.getElementById('timer-display'), questionText = document.getElementById('question-text'),
+          questionDifficulty = document.getElementById('question-difficulty'), answerOptionsContainer = document.getElementById('answer-options'),
+          winnerName = document.getElementById('winner-name'), restartGameBtn = document.getElementById('restart-game-btn'), quitGameBtn = document.getElementById('quit-game-btn');
+    const rankingList = document.getElementById('ranking-list'), rankingTitle = document.getElementById('ranking-title');
+    const editorPlayerNameInput = document.getElementById('editor-player-name'), myQuestionsList = document.getElementById('my-questions-list'),
+          questionIdInput = document.getElementById('question-id'), questionTextInput = document.getElementById('question-text-input'),
+          correctAnswInput = document.getElementById('correct-answer-input'), incorrectAnsw1Input = document.getElementById('incorrect-answer-1-input'),
+          incorrectAnsw2Input = document.getElementById('incorrect-answer-2-input'), incorrectAnsw3Input = document.getElementById('incorrect-answer-3-input'),
+          difficultyInput = document.getElementById('difficulty-input'), saveQuestionBtn = document.getElementById('save-question-btn'),
+          cancelEditBtn = document.getElementById('cancel-edit-btn');
+    
+    const BASE_URL = 'https://quiz-server-israel.onrender.com';
+    let socket, clientId, creatorName = '', timerInterval, tickInterval;
 
-            // Modais
-            const rulesModal = document.getElementById('rules-modal');
-            const rankingModal = document.getElementById('ranking-modal');
-
-            // Botões de Navegação e Modais
-            const showCreateBtn = document.getElementById('show-create-btn');
-            const showJoinBtn = document.getElementById('show-join-btn');
-            const showRulesBtn = document.getElementById('show-rules-btn');
-            const showRankingBtn = document.getElementById('show-ranking-btn');
-            const closeRulesBtn = document.getElementById('close-rules-btn');
-            const closeRankingBtn = document.getElementById('close-ranking-btn');
-            const backBtns = document.querySelectorAll('.btn-back');
-
-            // Elementos da Tela de Criar Sala
-            const createRoomIdInput = document.getElementById('create-room-id');
-            const createPlayerNameInput = document.getElementById('create-player-name');
-            const addQuestionBtn = document.getElementById('add-question-btn');
-            const customQuestionsList = document.getElementById('custom-questions-list');
-            const createGameBtn = document.getElementById('create-game-btn');
-
-            // Elementos da Tela de Entrar em Sala
-            const joinRoomIdInput = document.getElementById('join-room-id');
-            const joinPlayerNameInput = document.getElementById('join-player-name');
-            const joinGameBtn = document.getElementById('join-game-btn');
-
-            // Elementos do Jogo
-            const scoreboard = document.getElementById('scoreboard');
-            const timerDisplay = document.getElementById('timer-display');
-            const questionText = document.getElementById('question-text');
-            const questionDifficulty = document.getElementById('question-difficulty');
-            const answerOptionsContainer = document.getElementById('answer-options');
-            const winnerName = document.getElementById('winner-name');
-            const restartGameBtn = document.getElementById('restart-game-btn');
-            const quitGameBtn = document.getElementById('quit-game-btn');
-            const rankingList = document.getElementById('ranking-list');
-
-            // Estado do Cliente
-            let socket, clientId, customQuestionsBuffer = [], timerInterval;
-
-            // ==================================================
-            // 2. DEFINIÇÃO DAS FUNÇÕES PRINCIPAIS
-            // ==================================================
-            function switchScreen(screenName) {
-                Object.values(screens).forEach(screen => screen.classList.remove('active'));
-                if (screens[screenName]) {
-                    screens[screenName].classList.add('active');
-                }
+    function switchScreen(screenName) {
+        Object.values(screens).forEach(s => s.classList.remove('active'));
+        if (screens[screenName]) screens[screenName].classList.add('active');
+    }
+    function playSound(soundElement) { if (soundElement) { soundElement.currentTime = 0; soundElement.play().catch(e => {}); } }
+    
+    function connectToGame(roomId, playerName) {
+        if (!roomId || !playerName) { alert('Preencha o nome da sala e seu nome.'); return; }
+        clientId = playerName;
+        socket = new WebSocket(`${BASE_URL.replace('https', 'wss')}/ws/${roomId}/${playerName}`);
+        socket.onopen = () => { sessionStorage.clear(); };
+        socket.onmessage = (event) => {
+            const message = JSON.parse(event.data);
+            switch (message.type) {
+                case 'gameStateUpdate':
+                    const oldState = JSON.parse(sessionStorage.getItem('gameState') || '{}');
+                    updateUI(message.state, oldState);
+                    sessionStorage.setItem('gameState', JSON.stringify(message.state));
+                    break;
+                case 'gameOver':
+                    displayWinner(message.winner);
+                    break;
+                case 'answerResult':
+                    revealAnswer(message.correctAnswer, message.selectedAnswer);
+                    break;
             }
+        };
+        socket.onerror = (error) => { console.error("Erro no WebSocket:", error); alert("Não foi possível conectar ao servidor."); };
+    }
 
-            function connectToGame(roomId, playerName, customQuestions) {
-                if (!roomId || !playerName) {
-                    alert('Por favor, preencha o nome da sala e seu nome.');
-                    return;
-                }
-                clientId = playerName;
-                socket = new WebSocket(`wss://quiz-server-israel.onrender.com/ws/${roomId}/${playerName}`);
-
-                socket.onopen = () => {
-                    if (customQuestions.length > 0) {
-                        socket.send(JSON.stringify({ type: 'addCustomQuestions', questions: customQuestions }));
-                        customQuestionsBuffer = [];
-                    }
-                };
-                socket.onmessage = (event) => {
-                    const message = JSON.parse(event.data);
-                    switch (message.type) {
-                        case 'gameStateUpdate':
-                            updateUI(message.state);
-                            break;
-                        case 'gameOver':
-                            displayWinner(message.winner);
-                            break;
-                    }
-                };
-                socket.onerror = (error) => { console.error("Erro no WebSocket:", error); alert("Não foi possível conectar ao servidor."); };
+    function updateUI(state, oldState = {}) {
+        if (!screens.game.classList.contains('active') && !screens.gameOver.classList.contains('active')) {
+             switchScreen('game');
+        }
+        stopTimer();
+        scoreboard.innerHTML = '';
+        const playersList = Object.keys(state.players);
+        playersList.forEach((pId) => {
+            const oldScore = oldState.scores ? oldState.scores[pId] || 0 : 0;
+            const newScore = state.scores[pId];
+            const scoreDiv = document.createElement('div');
+            scoreDiv.className = 'player-score';
+            if (playersList[state.current_player_index] === pId) { scoreDiv.classList.add('active'); }
+            scoreDiv.innerHTML = `<h3 class="name">${pId}</h3><p class="score">${newScore}</p>`;
+            scoreboard.appendChild(scoreDiv);
+            const scoreP = scoreDiv.querySelector('.score');
+            if (scoreP) {
+                if (newScore > oldScore) { playSound(soundCorrect); scoreP.classList.add('animate-pop'); }
+                else if (newScore < oldScore) { playSound(soundWrong); scoreP.classList.add('animate-shake'); }
+                scoreP.addEventListener('animationend', () => scoreP.classList.remove('animate-pop', 'animate-shake'));
             }
-
-            function updateUI(state) {
-                if (!screens.game.classList.contains('active')) { switchScreen('game'); }
-                stopTimer();
-                scoreboard.innerHTML = '';
-                const playersList = Object.keys(state.players);
-                playersList.forEach((pId, index) => {
-                    const scoreDiv = document.createElement('div');
-                    scoreDiv.className = 'player-score';
-                    if (index === state.current_player_index) { scoreDiv.classList.add('active'); }
-                    scoreDiv.innerHTML = `<h3 class="name">${pId}</h3><p class="score">${state.scores[pId]}</p>`;
-                    scoreboard.appendChild(scoreDiv);
-                });
-                const question = state.current_question;
-                const currentPlayerId = playersList.length > 0 ? playersList[state.current_player_index] : null;
-                if (question && currentPlayerId) {
-                    questionText.textContent = question.question;
-                    questionDifficulty.textContent = `Dificuldade: ${question.difficulty}`;
-                    answerOptionsContainer.innerHTML = '';
-                    const shuffledOptions = [...question.options].sort(() => Math.random() - 0.5);
-                    shuffledOptions.forEach(option => {
-                        const button = document.createElement('button');
-                        button.textContent = option;
-                        button.className = 'option-btn';
-                        if (clientId === currentPlayerId) { button.onclick = () => sendAnswer(option); }
-                        else { button.disabled = true; }
-                        answerOptionsContainer.appendChild(button);
-                    });
-                    startTimer(state.timeRemaining);
-                } else {
-                    questionText.textContent = "Aguardando mais jogadores...";
-                    answerOptionsContainer.innerHTML = '';
-                }
-            }
-
-            function sendAnswer(answer) { if (socket) { socket.send(JSON.stringify({ type: 'submitAnswer', answer: answer })); } }
-
-            function startTimer(startTime) {
-                let timer = startTime || 30;
-                timerDisplay.textContent = timer;
-                timerInterval = setInterval(() => { timer--; timerDisplay.textContent = timer; if (timer <= 0) stopTimer(); }, 1000);
-            }
-
-            function stopTimer() { clearInterval(timerInterval); }
-
-            function displayWinner(winnerId) {
-                winnerName.textContent = winnerId || "Empate!";
-                switchScreen('gameOver');
-            }
-
-            // ==================================================
-            // 3. ADIÇÃO DOS EVENT LISTENERS (Gatilhos)
-            // ==================================================
-
-            // Navegação entre telas
-            showCreateBtn.addEventListener('click', () => switchScreen('create'));
-            showJoinBtn.addEventListener('click', () => switchScreen('join'));
-            backBtns.forEach(btn => btn.addEventListener('click', () => switchScreen('welcome')));
-
-            // Modal de Regras
-            showRulesBtn.addEventListener('click', () => rulesModal.classList.add('visible'));
-            closeRulesBtn.addEventListener('click', () => rulesModal.classList.remove('visible'));
-            rulesModal.addEventListener('click', (e) => { if (e.target === rulesModal) { rulesModal.classList.remove('visible'); } });
-
-            // Modal de Ranking
-            showRankingBtn.addEventListener('click', async () => {
-                rankingList.innerHTML = '<li>Carregando ranking...</li>';
-                rankingModal.classList.add('visible');
-                try {
-                    const response = await fetch('https://quiz-server-israel.onrender.com/ranking');
-                    if (!response.ok) throw new Error('Falha na rede');
-                    const rankingData = await response.json();
-
-                    rankingList.innerHTML = '';
-                    if (rankingData.length === 0) {
-                        rankingList.innerHTML = '<li>Nenhuma pontuação registrada ainda. Jogue uma partida!</li>';
-                    } else {
-                        rankingData.forEach((player, index) => {
-                            const li = document.createElement('li');
-                            li.innerHTML = `
-                        <div><span class="rank-pos">#${index + 1}</span> ${player.name}</div>
-                        <span class="rank-score">${player.score} pts</span>
-                    `;
-                            rankingList.appendChild(li);
-                        });
-                    }
-                } catch (error) {
-                    console.error("Erro ao buscar ranking:", error);
-                    rankingList.innerHTML = '<li>Não foi possível carregar o ranking. Tente novamente.</li>';
-                }
-            });
-            closeRankingBtn.addEventListener('click', () => rankingModal.classList.remove('visible'));
-            rankingModal.addEventListener('click', (e) => { if (e.target === rankingModal) { rankingModal.classList.remove('visible'); } });
-
-            // Lógica para adicionar perguntas customizadas
-            addQuestionBtn.addEventListener('click', () => {
-                const qInput = document.getElementById('custom-question'), correctInput = document.getElementById('custom-answer-correct');
-                const incorrectInputs = [document.getElementById('custom-answer-incorrect1'), document.getElementById('custom-answer-incorrect2'), document.getElementById('custom-answer-incorrect3')];
-                const diffSelect = document.getElementById('custom-difficulty');
-                const question = qInput.value.trim(), correctAnswer = correctInput.value.trim();
-                const incorrectAnswers = incorrectInputs.map(i => i.value.trim()).filter(Boolean);
-                if (question && correctAnswer && incorrectAnswers.length > 0) {
-                    customQuestionsBuffer.push({ question, options: [...incorrectAnswers, correctAnswer], correctAnswer, difficulty: diffSelect.value });
-                    const li = document.createElement('li');
-                    li.textContent = `[${diffSelect.value}] ${question}`;
-                    customQuestionsList.appendChild(li);
-                    [qInput, correctInput, ...incorrectInputs].forEach(i => i.value = '');
-                } else { alert('Preencha a pergunta, a resposta correta e pelo menos uma incorreta.'); }
-            });
-
-            // Conexão ao Jogo
-            createGameBtn.addEventListener('click', () => {
-                const roomId = createRoomIdInput.value.trim(), playerName = createPlayerNameInput.value.trim();
-                connectToGame(roomId, playerName, customQuestionsBuffer);
-            });
-            joinGameBtn.addEventListener('click', () => {
-                const roomId = joinRoomIdInput.value.trim(), playerName = joinPlayerNameInput.value.trim();
-                connectToGame(roomId, playerName, []);
-            });
-
-            // Ações Finais
-            quitGameBtn.addEventListener('click', () => {
-                if (socket && confirm("Você tem certeza que deseja desistir da partida?")) {
-                    socket.close();
-                    switchScreen('welcome');
-                }
-            });
-            restartGameBtn.addEventListener('click', () => {
-                if (socket) socket.close();
-                customQuestionsList.innerHTML = '';
-                switchScreen('welcome');
-            });
         });
-    </script>
-</body>
+        const question = state.current_question;
+        const currentPlayerId = playersList.length > 0 ? playersList[state.current_player_index] : null;
+        if (question && currentPlayerId) {
+            questionText.textContent = question.question;
+            questionDifficulty.textContent = `Dificuldade: ${question.difficulty}`;
+            answerOptionsContainer.innerHTML = '';
+            const shuffledOptions = [...question.options].sort(() => Math.random() - 0.5);
+            shuffledOptions.forEach(option => {
+                const button = document.createElement('button');
+                button.textContent = option;
+                button.className = 'option-btn';
+                if (clientId === currentPlayerId) { button.onclick = () => sendAnswer(option); }
+                else { button.disabled = true; }
+                answerOptionsContainer.appendChild(button);
+            });
+            startTimer(state.timeRemaining);
+        } else {
+            questionText.textContent = "Aguardando mais jogadores...";
+            answerOptionsContainer.innerHTML = '';
+        }
+    }
+    
+    function revealAnswer(correctAnswer, selectedAnswer) {
+        Array.from(answerOptionsContainer.children).forEach(button => {
+            button.disabled = true;
+            if (button.textContent === correctAnswer) { button.classList.add('flash-green'); }
+            else if (button.textContent === selectedAnswer) { button.classList.add('flash-red'); }
+        });
+    }
 
+    function sendAnswer(answer) { if (socket) { Array.from(answerOptionsContainer.children).forEach(button => button.disabled = true); socket.send(JSON.stringify({ type: 'submitAnswer', answer: answer })); } }
+    
+    function startTimer(startTime) {
+        stopTimer(); let timer = startTime || 30;
+        timerDisplay.textContent = timer; timerDisplay.style.color = 'var(--primary-color)';
+        timerInterval = setInterval(() => { timer--; timerDisplay.textContent = timer; if (timer <= 0) { stopTimer(); }}, 1000);
+        tickInterval = setInterval(() => { if (parseInt(timerDisplay.textContent) <= 5 && parseInt(timerDisplay.textContent) > 0) { playSound(soundTick); timerDisplay.style.color = 'var(--warning-color)'; }}, 1000);
+    }
+    
+    function stopTimer() {
+        clearInterval(timerInterval);
+        clearInterval(tickInterval);
+        if (soundTick) {
+            soundTick.pause();
+            soundTick.currentTime = 0;
+        }
+        timerDisplay.style.color = 'var(--primary-color)';
+    }
+
+    function displayWinner(winnerId) {
+        stopTimer();
+        winnerName.textContent = winnerId || "Empate!";
+        switchScreen('gameOver');
+        startConfetti();
+    }
+
+    function startConfetti() {
+        const canvas = document.getElementById('confetti-canvas');
+        if (!canvas) return;
+        const ctx = canvas.getContext('2d');
+        const container = canvas.parentElement.parentElement;
+        canvas.width = container.clientWidth;
+        canvas.height = container.clientHeight;
+
+        const confettiCount = 200;
+        const confetti = [];
+        const colors = ['#4a90e2', '#50e3c2', '#f5a623', '#e35050', '#fff'];
+
+        for (let i = 0; i < confettiCount; i++) {
+            confetti.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height - canvas.height,
+                radius: Math.random() * 5 + 2,
+                color: colors[Math.floor(Math.random() * colors.length)],
+                speed: Math.random() * 3 + 2,
+                angle: Math.random() * 2 * Math.PI,
+                opacity: 1
+            });
+        }
+
+        let animationFrameId;
+        function drawConfetti() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            let activeConfetti = 0;
+            confetti.forEach(c => {
+                if(c.y < canvas.height && c.opacity > 0) {
+                    activeConfetti++;
+                    c.y += c.speed;
+                    c.x += Math.sin(c.angle + c.y / 20) * 2;
+                    c.opacity -= 0.005;
+
+                    ctx.globalAlpha = c.opacity;
+                    ctx.beginPath();
+                    ctx.fillStyle = c.color;
+                    ctx.arc(c.x, c.y, c.radius, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+            });
+            if (activeConfetti > 0) {
+               animationFrameId = requestAnimationFrame(drawConfetti);
+            } else {
+               ctx.clearRect(0, 0, canvas.width, canvas.height);
+               cancelAnimationFrame(animationFrameId);
+            }
+        }
+        drawConfetti();
+    }
+    async function loadPlayerQuestions(playerName) {
+        myQuestionsList.innerHTML = '<li>Carregando...</li>';
+        try {
+            const response = await fetch(`${BASE_URL}/questions/${playerName}`);
+            if (!response.ok) throw new Error('Jogador não encontrado ou sem perguntas.');
+            const questions = await response.json();
+            renderQuestionsList(questions);
+        } catch (e) { myQuestionsList.innerHTML = `<li>${e.message}</li>`; }
+    }
+    function renderQuestionsList(questions) {
+        myQuestionsList.innerHTML = '';
+        if (questions.length === 0) { myQuestionsList.innerHTML = '<li>Você ainda não criou nenhuma pergunta.</li>'; return; }
+        questions.forEach(q => {
+            const li = document.createElement('li');
+            li.dataset.questionData = JSON.stringify(q);
+            li.innerHTML = `<span>${q.question}</span><div><button class="btn btn-small edit-btn" data-id="${q.id}">Editar</button><button class="btn btn-small btn-danger delete-btn" data-id="${q.id}">Excluir</button></div>`;
+            myQuestionsList.appendChild(li);
+        });
+    }
+    async function deleteQuestion(questionId, playerName) {
+        try {
+            const response = await fetch(`${BASE_URL}/questions/${questionId}/${playerName}`, { method: 'DELETE' });
+            if (!response.ok) throw new Error('Falha ao excluir a pergunta.');
+            loadPlayerQuestions(playerName);
+        } catch (e) { alert(e.message); }
+    }
+    function populateEditorForm(question) {
+        questionIdInput.value = question.id;
+        questionTextInput.value = question.question;
+        correctAnswInput.value = question.correctAnswer;
+        const incorrects = question.options.filter(opt => opt !== question.correctAnswer);
+        incorrectAnsw1Input.value = incorrects[0] || '';
+        incorrectAnsw2Input.value = incorrects[1] || '';
+        incorrectAnsw3Input.value = incorrects[2] || '';
+        difficultyInput.value = question.difficulty;
+        saveQuestionBtn.textContent = 'Atualizar Pergunta';
+        cancelEditBtn.style.display = 'inline-block';
+    }
+    function resetEditorForm() {
+        questionIdInput.value = ''; questionTextInput.value = ''; correctAnswInput.value = '';
+        incorrectAnsw1Input.value = ''; incorrectAnsw2Input.value = ''; incorrectAnsw3Input.value = '';
+        saveQuestionBtn.textContent = 'Salvar Pergunta';
+        cancelEditBtn.style.display = 'none';
+    }
+
+    // Event Listeners
+    showCreateBtn.addEventListener('click', () => switchScreen('create'));
+    showJoinBtn.addEventListener('click', () => switchScreen('join'));
+    showEditorBtn.addEventListener('click', () => switchScreen('editor'));
+    backBtns.forEach(btn => btn.addEventListener('click', () => { resetEditorForm(); switchScreen('welcome'); }));
+    showRulesBtn.addEventListener('click', () => rulesModal.classList.add('visible'));
+    closeRulesBtn.addEventListener('click', () => rulesModal.classList.remove('visible'));
+    rulesModal.addEventListener('click', (e) => { if (e.target === rulesModal) { rulesModal.classList.remove('visible'); } });
+    showRankingBtn.addEventListener('click', async () => {
+        const hostName = prompt("Digite o nome do anfitrião do ranking que você deseja ver:");
+        if (!hostName) return;
+        rankingTitle.textContent = `🏆 Ranking de ${hostName} 🏆`;
+        rankingList.innerHTML = '<li>Carregando ranking...</li>';
+        rankingModal.classList.add('visible');
+        try {
+            const response = await fetch(`${BASE_URL}/ranking/${hostName}`);
+            if (!response.ok) throw new Error('Ranking não encontrado ou falha na rede.');
+            const rankingData = await response.json();
+            rankingList.innerHTML = '';
+            if (rankingData.length === 0) { rankingList.innerHTML = `<li>O ranking de ${hostName} está vazio.</li>`; }
+            else { rankingData.forEach((player, index) => { const li = document.createElement('li'); li.innerHTML = `<div><span class="rank-pos">#${index + 1}</span> ${player.name}</div> <span class="rank-score">${player.score} pts</span>`; rankingList.appendChild(li); }); }
+        } catch (error) { console.error("Erro ao buscar ranking:", error); rankingList.innerHTML = `<li>${error.message}</li>`; }
+    });
+    closeRankingBtn.addEventListener('click', () => rankingModal.classList.remove('visible'));
+    rankingModal.addEventListener('click', (e) => { if (e.target === rankingModal) { rankingModal.classList.remove('visible'); } });
+    editorPlayerNameInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') { 
+            creatorName = editorPlayerNameInput.value.trim(); 
+            if (creatorName) { 
+                editorPlayerNameInput.disabled = true; 
+                loadPlayerQuestions(creatorName); 
+            } 
+        }
+    });
+    saveQuestionBtn.addEventListener('click', async () => {
+        if (!creatorName) { alert('Digite seu nome de criador e pressione Enter.'); return; }
+        const questionData = {
+            question_text: questionTextInput.value, correct_answer: correctAnswInput.value,
+            incorrect_answers: [incorrectAnsw1Input.value, incorrectAnsw2Input.value, incorrectAnsw3Input.value],
+            difficulty: difficultyInput.value
+        };
+        if (!questionData.question_text || !questionData.correct_answer || questionData.incorrect_answers.some(a => !a)) { alert('Preencha todos os campos da pergunta e respostas.'); return; }
+        const questionId = questionIdInput.value;
+        const method = questionId ? 'PUT' : 'POST';
+        const url = questionId ? `${BASE_URL}/questions/${questionId}/${creatorName}` : `${BASE_URL}/questions/${creatorName}`;
+        try {
+            const response = await fetch(url, { method: method, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(questionData) });
+            if (!response.ok) throw new Error('Falha ao salvar a pergunta.');
+            resetEditorForm(); loadPlayerQuestions(creatorName);
+        } catch (e) { alert(e.message); }
+    });
+    cancelEditBtn.addEventListener('click', resetEditorForm);
+    myQuestionsList.addEventListener('click', async (e) => {
+        const questionId = e.target.dataset.id;
+        if (!questionId || !creatorName) return;
+        if (e.target.classList.contains('delete-btn')) { if (confirm('Tem certeza?')) { await deleteQuestion(questionId, creatorName); } }
+        if (e.target.classList.contains('edit-btn')) { const questionData = JSON.parse(e.target.closest('li').dataset.questionData); populateEditorForm(questionData); }
+    });
+    createGameBtn.addEventListener('click', () => connectToGame(createRoomIdInput.value.trim(), createPlayerNameInput.value.trim()));
+    joinGameBtn.addEventListener('click', () => connectToGame(joinRoomIdInput.value.trim(), joinPlayerNameInput.value.trim()));
+    quitGameBtn.addEventListener('click', () => { if (socket) { socket.close(); switchScreen('welcome'); } });
+    restartGameBtn.addEventListener('click', () => { if (socket) { socket.close(); switchScreen('welcome'); } });
+});
+</script>
+</body>
 </html>
