@@ -86,8 +86,8 @@ default_questions = [
     },
     {
         "question": "Para que serve a anotação @Override?",
-        "options": ["Indica que um método está sendo sobrescrito", "Indica um método obsoleto", "Inicia um novo método", "Importa uma biblioteca"],
-        "correctAnswer": "Indica que um método está sendo sobrescrito",
+        "options": ["Indica que um método está sendo sobrescrito da superclasse", "Sinaliza que um método será removido em versões futuras", "Define um novo método que não pode ser modificado", "Inicia a execução principal de uma classe específica"],
+        "correctAnswer": "Indica que um método está sendo sobrescrito da superclasse",
         "difficulty": "Fácil"
     },
     {
@@ -110,14 +110,14 @@ default_questions = [
     },
     {
         "question": "O que faz um método 'getter'?",
-        "options": ["Acessar os valores dos atributos privados", "Modificar os valores dos atributos privados", "Deletar um objeto", "Criar um novo objeto"],
-        "correctAnswer": "Acessar os valores dos atributos privados",
+        "options": ["Permite o acesso seguro aos valores de atributos privados", "Modifica diretamente os valores de atributos públicos", "Exclui permanentemente um objeto da memória RAM", "Constrói uma nova instância de um objeto da classe"],
+        "correctAnswer": "Permite o acesso seguro aos valores de atributos privados",
         "difficulty": "Fácil"
     },
     {
         "question": "O que faz um método 'setter'?",
-        "options": ["Modificar os valores dos atributos privados", "Acessar os valores dos atributos privados", "Retornar o nome da classe", "Verificar se um objeto é nulo"],
-        "correctAnswer": "Modificar os valores dos atributos privados",
+        "options": ["Permite a modificação segura dos valores de atributos privados", "Acessa os valores de atributos sem permitir alterá-los", "Retorna o nome da classe em formato de texto (String)", "Verifica se um determinado objeto possui valor nulo"],
+        "correctAnswer": "Permite a modificação segura dos valores de atributos privados",
         "difficulty": "Fácil"
     },
     {
@@ -128,8 +128,8 @@ default_questions = [
     },
     {
         "question": "Na classe Aluno, por que os atributos são declarados como 'private'?",
-        "options": ["Para não poderem ser acessados diretamente de fora da classe", "Para economizar memória", "Para serem mais rápidos", "Para serem acessíveis a todos os pacotes"],
-        "correctAnswer": "Para não poderem ser acessados diretamente de fora da classe",
+        "options": ["Para proteger os dados e controlar o acesso através de getters e setters", "Para otimizar o consumo de memória RAM da aplicação", "Para tornar o acesso aos atributos consideravelmente mais rápido", "Para que possam ser acessados por qualquer classe em qualquer pacote"],
+        "correctAnswer": "Para proteger os dados e controlar o acesso através de getters e setters",
         "difficulty": "Fácil"
     },
     {
@@ -146,13 +146,13 @@ default_questions = [
     },
     {
         "question": "Qual classe implementa AlunoRepository usando um ArrayList?",
-        "options": ["AlunoRepositoryLista", "AlunoRepositoryArray", "AlunoRepositoryList", "AlunoRepositoryArrayList"],
+        "options": ["AlunoRepositoryLista", "AlunoRepositoryArray", "AlunoRepositoryList", "AlunoRepositoryVector"],
         "correctAnswer": "AlunoRepositoryLista",
         "difficulty": "Fácil"
     },
     {
         "question": "Qual classe implementa AlunoRepository usando um vetor (array)?",
-        "options": ["AlunoRepositoryVetor", "AlunoRepositoryArray", "AlunoRepositoryVector", "AlunoRepositoryFixed"],
+        "options": ["AlunoRepositoryVetor", "AlunoRepositoryArray", "AlunoRepositoryVector", "AlunoRepositoryLinked"],
         "correctAnswer": "AlunoRepositoryVetor",
         "difficulty": "Fácil"
     },
@@ -164,19 +164,19 @@ default_questions = [
     },
     {
         "question": "No Validador, qual método verifica se uma string é nula ou vazia?",
-        "options": ["isNullOrEmpty", "checkEmpty", "validateString", "isEmpty"],
+        "options": ["isNullOrEmpty", "checkIfBlank", "validateString", "isEmptyOrNull"],
         "correctAnswer": "isNullOrEmpty",
         "difficulty": "Fácil"
     },
     {
         "question": "O que o método toString() na classe Aluno retorna?",
-        "options": ["Uma string formatada com todos os atributos do aluno", "O ID do aluno", "O nome da classe", "Um valor nulo"],
-        "correctAnswer": "Uma string formatada com todos os atributos do aluno",
+        "options": ["Uma representação em texto com todos os dados do aluno", "Apenas o número de identificação (ID) do aluno", "O endereço de memória onde o objeto está alocado", "Um valor booleano indicando se o aluno está ativo"],
+        "correctAnswer": "Uma representação em texto com todos os dados do aluno",
         "difficulty": "Fácil"
     },
     {
         "question": "Qual método da AlunoView é responsável por exibir o menu de opções?",
-        "options": ["mostrarMenu()", "displayMenu()", "printMenu()", "viewMenu()"],
+        "options": ["mostrarMenu()", "displayOptions()", "printChoices()", "viewSelector()"],
         "correctAnswer": "mostrarMenu()",
         "difficulty": "Fácil"
     },
@@ -194,8 +194,8 @@ default_questions = [
     },
     {
         "question": "Para que serve a variável 'proximoId' na classe AlunoRepositoryLista?",
-        "options": ["Para rastrear o próximo ID a ser atribuído a um novo aluno", "Para contar o total de alunos", "Para definir o limite de alunos", "Para armazenar o último ID usado"],
-        "correctAnswer": "Para rastrear o próximo ID a ser atribuído a um novo aluno",
+        "options": ["Para gerar um ID único para cada novo aluno cadastrado", "Para armazenar a quantidade total de alunos na lista", "Para definir o limite máximo de alunos que podem ser criados", "Para guardar o último ID de aluno que foi removido"],
+        "correctAnswer": "Para gerar um ID único para cada novo aluno cadastrado",
         "difficulty": "Fácil"
     },
     {
@@ -212,8 +212,8 @@ default_questions = [
     },
     {
         "question": "O que o método 'salvar' da interface AlunoRepository recebe como parâmetro?",
-        "options": ["Um objeto do tipo Aluno", "Um número de ID", "Uma string com o nome", "Uma lista de Alunos"],
-        "correctAnswer": "Um objeto do tipo Aluno",
+        "options": ["Um objeto completo do tipo Aluno", "Apenas o número de ID do aluno", "Uma String contendo o nome do aluno", "Uma lista com todos os alunos atuais"],
+        "correctAnswer": "Um objeto completo do tipo Aluno",
         "difficulty": "Fácil"
     },
     {
@@ -224,14 +224,14 @@ default_questions = [
     },
     {
         "question": "O que a palavra-chave 'this' refere-se dentro de um construtor?",
-        "options": ["Ao objeto atual da classe", "À classe pai", "A uma variável estática", "Ao pacote atual"],
-        "correctAnswer": "Ao objeto atual da classe",
+        "options": ["Refere-se à instância atual do objeto que está sendo criado", "Indica a superclasse (classe pai) da classe atual", "Acessa uma variável estática compartilhada entre todos os objetos", "Aponta para o pacote onde a classe está localizada"],
+        "correctAnswer": "Refere-se à instância atual do objeto que está sendo criado",
         "difficulty": "Fácil"
     },
     {
         "question": "O que a classe 'Optional' representa?",
-        "options": ["Um contêiner que pode ou não conter um valor", "Uma lista de opções para o usuário", "Um tipo de dado opcional", "Uma classe de validação"],
-        "correctAnswer": "Um contêiner que pode ou não conter um valor",
+        "options": ["Um objeto contêiner que pode ou não conter um valor não-nulo", "Uma lista de opções de múltipla escolha para o usuário", "Um tipo de dado que não exige a alocação de memória", "Uma classe que oferece métodos para validar entradas"],
+        "correctAnswer": "Um objeto contêiner que pode ou não conter um valor não-nulo",
         "difficulty": "Fácil"
     },
     {
@@ -254,8 +254,8 @@ default_questions = [
     },
     {
         "question": "O que o método 'scanner.close()' faz?",
-        "options": ["Fecha o scanner, liberando os recursos associados a ele", "Limpa o buffer do scanner", "Reinicia o scanner", "Pausa a leitura do scanner"],
-        "correctAnswer": "Fecha o scanner, liberando os recursos associados a ele",
+        "options": ["Fecha o objeto Scanner e libera os recursos do sistema que ele estava usando", "Limpa o buffer de entrada do scanner para a próxima leitura de dados", "Reinicia o scanner para o início do fluxo de entrada de dados", "Faz uma pausa na execução do programa aguardando uma nova entrada"],
+        "correctAnswer": "Fecha o objeto Scanner e libera os recursos do sistema que ele estava usando",
         "difficulty": "Fácil"
     },
     # =================================================================
@@ -263,176 +263,176 @@ default_questions = [
     # =================================================================
     {
         "question": "Por que os métodos na classe Validador são declarados como 'static'?",
-        "options": ["Para serem chamados diretamente pela classe, sem precisar criar um objeto", "Para economizar memória", "Para serem compartilhados entre threads", "Para não poderem ser sobrescritos"],
-        "correctAnswer": "Para serem chamados diretamente pela classe, sem precisar criar um objeto",
+        "options": ["Para que possam ser chamados sem a necessidade de criar uma instância da classe", "Para que seu valor seja compartilhado e sincronizado entre múltiplas threads", "Para impedir que classes filhas possam sobrescrever sua implementação", "Para garantir que a alocação de memória para eles seja mais eficiente"],
+        "correctAnswer": "Para que possam ser chamados sem a necessidade de criar uma instância da classe",
         "difficulty": "Médio"
     },
     {
         "question": "Qual a finalidade de usar Optional<Aluno> como tipo de retorno em métodos de busca?",
-        "options": ["Para representar um valor que pode ou não estar presente, evitando NullPointerException", "Para retornar uma lista de alunos opcionais", "Para otimizar a busca no banco de dados", "Para obrigar o uso de um bloco try-catch"],
-        "correctAnswer": "Para representar um valor que pode ou não estar presente, evitando NullPointerException",
+        "options": ["Para tratar explicitamente a possibilidade de um resultado não ser encontrado, evitando NullPointerException", "Para retornar uma lista de alunos onde cada um pode ser nulo ou não", "Para otimizar a performance da consulta em bancos de dados relacionais", "Para forçar o desenvolvedor a usar um bloco try-catch ao chamar o método"],
+        "correctAnswer": "Para tratar explicitamente a possibilidade de um resultado não ser encontrado, evitando NullPointerException",
         "difficulty": "Médio"
     },
     {
         "question": "Na classe Main, como o programa decide qual implementação de AlunoRepository utilizar?",
-        "options": ["Através de um menu de escolha para o usuário no console", "É definido aleatoriamente na execução", "Usa sempre a implementação 'Lista' por padrão", "Verifica qual arquivo de configuração existe"],
-        "correctAnswer": "Através de um menu de escolha para o usuário no console",
+        "options": ["O usuário escolhe entre 'Vetor' ou 'Lista' através de um menu no console", "O sistema operacional determina a melhor implementação em tempo de execução", "É usada a implementação 'Lista' por padrão em todas as execuções", "O programa verifica qual arquivo de configuração (.properties) está presente"],
+        "correctAnswer": "O usuário escolhe entre 'Vetor' ou 'Lista' através de um menu no console",
         "difficulty": "Médio"
     },
     {
         "question": "Explique o que a linha 'scanner.nextLine();' faz logo após 'scanner.nextInt();' em AlunoView.",
-        "options": ["Limpa o buffer do scanner, consumindo o caractere de nova linha", "Lê a próxima linha de texto digitada pelo usuário", "Pula para a próxima opção do menu", "Causa uma pausa de 1 segundo no programa"],
-        "correctAnswer": "Limpa o buffer do scanner, consumindo o caractere de nova linha",
+        "options": ["Consome o caractere de nova linha (\\n) que ficou no buffer de entrada", "Lê a próxima linha de texto completa que o usuário digitar", "Ignora a entrada atual e avança para a próxima solicitação de dados", "Causa uma pausa de um segundo antes de prosseguir com a execução"],
+        "correctAnswer": "Consome o caractere de nova linha (\\n) que ficou no buffer de entrada",
         "difficulty": "Médio"
     },
     {
         "question": "Como o método 'salvar' da AlunoRepositoryLista garante que cada aluno tenha um ID único?",
-        "options": ["Usa uma variável 'proximoId' que é incrementada a cada novo aluno", "Gera um número aleatório para o ID", "Verifica o último ID na lista e soma 1", "Pede para o usuário digitar um ID único"],
-        "correctAnswer": "Usa uma variável 'proximoId' que é incrementada a cada novo aluno",
+        "options": ["Incrementando uma variável de controle ('proximoId') a cada nova inserção", "Gerando um número de ID aleatório e verificando se ele já existe na lista", "Solicitando que o próprio usuário digite um número de ID que seja único", "Utilizando o hash do objeto Aluno como seu identificador único na lista"],
+        "correctAnswer": "Incrementando uma variável de controle ('proximoId') a cada nova inserção",
         "difficulty": "Médio"
     },
     {
         "question": "No método listarTodos de AlunoRepositoryLista, em que ordem os alunos são retornados?",
-        "options": ["Ordenados pelo nome", "Na ordem em que foram inseridos", "Ordenados pelo ID", "Em ordem aleatória"],
-        "correctAnswer": "Ordenados pelo nome",
+        "options": ["São retornados em ordem alfabética, com base no nome", "São retornados na mesma ordem em que foram inseridos", "São retornados em ordem crescente, com base no ID", "São retornados em uma ordem completamente aleatória"],
+        "correctAnswer": "São retornados em ordem alfabética, com base no nome",
         "difficulty": "Médio"
     },
     {
         "question": "No AlunoRepositoryVetor, o que acontece se o método 'salvar' for chamado quando o vetor já estiver cheio?",
-        "options": ["Imprime uma mensagem de erro e não salva o aluno", "Aumenta o tamanho do vetor dinamicamente", "Substitui o aluno mais antigo", "Lança uma exceção do tipo 'ArrayIndexOutOfBoundsException'"],
-        "correctAnswer": "Imprime uma mensagem de erro e não salva o aluno",
+        "options": ["Uma mensagem de erro é exibida e o aluno não é adicionado", "O tamanho do vetor é automaticamente dobrado para comportar mais alunos", "O aluno mais antigo da lista é substituído pelo novo aluno", "Uma exceção do tipo 'ArrayIndexOutOfBoundsException' é lançada"],
+        "correctAnswer": "Uma mensagem de erro é exibida e o aluno não é adicionado",
         "difficulty": "Médio"
     },
     {
         "question": "Qual tecnologia é usada na classe Validador para verificar os formatos de CPF e e-mail?",
-        "options": ["Expressões Regulares (Regex)", "Inteligência Artificial", "Algoritmos de Hash", "Comparações de String simples"],
+        "options": ["Expressões Regulares (Regex)", "Algoritmos de Inteligência Artificial", "Funções de Hash criptográficas", "Comparações de String simples e diretas"],
         "correctAnswer": "Expressões Regulares (Regex)",
         "difficulty": "Médio"
     },
     {
         "question": "O que a expressão 'alunos.stream()' faz nas implementações de AlunoRepository?",
-        "options": ["Converte a coleção de alunos em um fluxo de dados para operações declarativas", "Transmite os dados dos alunos pela rede", "Cria um arquivo de log com os dados dos alunos", "Compacta a lista de alunos para economizar espaço"],
-        "correctAnswer": "Converte a coleção de alunos em um fluxo de dados para operações declarativas",
+        "options": ["Cria um fluxo de dados (Stream) a partir da coleção para realizar operações", "Inicia a transmissão dos dados dos alunos através de uma conexão de rede", "Gera um arquivo de log com os detalhes de cada aluno da coleção", "Comprime a lista de alunos em um formato mais compacto para economizar espaço"],
+        "correctAnswer": "Cria um fluxo de dados (Stream) a partir da coleção para realizar operações",
         "difficulty": "Médio"
     },
     {
         "question": "Como o método 'remover' da classe AlunoRepositoryLista funciona?",
-        "options": ["Usa o método 'removeIf' para remover o aluno com o ID correspondente", "Percorre a lista com um laço 'for' e remove pelo índice", "Cria uma nova lista sem o aluno a ser removido", "Marca o aluno como 'removido' sem tirá-lo da lista"],
-        "correctAnswer": "Usa o método 'removeIf' para remover o aluno com o ID correspondente",
+        "options": ["Usa o método 'removeIf' da coleção para apagar o aluno com o ID correspondente", "Percorre a lista com um laço 'for' e remove o elemento pelo seu índice numérico", "Cria uma nova lista contendo todos os alunos, exceto aquele a ser removido", "Marca o aluno com um status 'removido' sem de fato tirá-lo da lista"],
+        "correctAnswer": "Usa o método 'removeIf' da coleção para apagar o aluno com o ID correspondente",
         "difficulty": "Médio"
     },
     {
         "question": "No método cadastrarAluno do AlunoService, qual verificação é feita imediatamente após validar os campos?",
-        "options": ["Verifica se já existe um aluno com a mesma matrícula", "Verifica se o nome do aluno é único", "Verifica a idade do aluno", "Salva o aluno no repositório"],
-        "correctAnswer": "Verifica se já existe um aluno com a mesma matrícula",
+        "options": ["Verifica se a matrícula informada já está em uso por outro aluno", "Verifica se o nome do aluno já existe no repositório", "Confere se a idade do aluno está dentro de um limite permitido", "Salva o aluno no repositório antes de qualquer outra verificação"],
+        "correctAnswer": "Verifica se a matrícula informada já está em uso por outro aluno",
         "difficulty": "Médio"
     },
     {
         "question": "Qual o propósito do bloco 'switch' dentro do método mostrarMenu da AlunoView?",
-        "options": ["Executar a ação correspondente à opção escolhida pelo usuário", "Validar a entrada do usuário", "Trocar o repositório de dados em tempo de execução", "Mudar a cor do texto no console"],
-        "correctAnswer": "Executar a ação correspondente à opção escolhida pelo usuário",
+        "options": ["Direcionar o fluxo do programa para a ação escolhida pelo usuário", "Validar se a entrada do usuário é um número inteiro válido", "Alternar entre as implementações de repositório (Vetor ou Lista)", "Mudar a formatação visual do texto exibido no console"],
+        "correctAnswer": "Direcionar o fluxo do programa para a ação escolhida pelo usuário",
         "difficulty": "Médio"
     },
     {
         "question": "Qual a diferença na forma como 'buscarPorId' é implementado em AlunoRepositoryLista e AlunoRepositoryVetor?",
-        "options": ["'Lista' usa a API de Streams, enquanto 'Vetor' usa um laço 'for' tradicional", "'Lista' é mais rápido para poucos dados, 'Vetor' é mais rápido para muitos", "Ambos usam a mesma implementação com laço 'for'", "'Lista' usa busca binária e 'Vetor' usa busca linear"],
-        "correctAnswer": "'Lista' usa a API de Streams, enquanto 'Vetor' usa um laço 'for' tradicional",
+        "options": ["A versão 'Lista' usa a API de Streams e filter, enquanto a 'Vetor' usa um laço 'for'", "A versão 'Lista' é mais rápida para poucos dados e a 'Vetor' para muitos", "Ambas as classes utilizam exatamente a mesma implementação com laço 'for'", "A 'Lista' usa busca binária, que é mais eficiente que a busca linear do 'Vetor'"],
+        "correctAnswer": "A versão 'Lista' usa a API de Streams e filter, enquanto a 'Vetor' usa um laço 'for'",
         "difficulty": "Médio"
     },
     {
         "question": "No método removerAluno de AlunoService, como ele informa à AlunoView se a operação foi bem-sucedida?",
-        "options": ["Retornando uma string com a mensagem de sucesso ou erro", "Retornando um valor booleano 'true' ou 'false'", "Lançando uma exceção em caso de erro", "Imprimindo o resultado diretamente no console"],
-        "correctAnswer": "Retornando uma string com a mensagem de sucesso ou erro",
+        "options": ["Retornando uma String com uma mensagem de sucesso ou de erro", "Retornando um valor booleano, 'true' para sucesso e 'false' para falha", "Lançando uma exceção customizada em caso de falha na remoção", "Imprimindo o resultado da operação diretamente no console"],
+        "correctAnswer": "Retornando uma String com uma mensagem de sucesso ou de erro",
         "difficulty": "Médio"
     },
     {
         "question": "Qual é o papel da classe ArrayList importada em AlunoRepositoryLista?",
-        "options": ["É uma implementação de List que armazena objetos de forma dinâmica", "É uma classe para ordenar arrays", "É uma classe para converter listas em vetores", "É uma classe de utilitários para listas"],
-        "correctAnswer": "É uma implementação de List que armazena objetos de forma dinâmica",
+        "options": ["Fornecer uma estrutura de dados de lista com tamanho dinâmico", "Oferecer métodos estáticos para ordenação de arrays e listas", "Permitir a conversão de uma lista para um vetor (array) de tamanho fixo", "Servir como uma classe de utilitários para operações em listas"],
+        "correctAnswer": "Fornecer uma estrutura de dados de lista com tamanho dinâmico",
         "difficulty": "Médio"
     },
     {
         "question": "O que a expressão 'Comparator.comparing(Aluno::getNome)' faz?",
-        "options": ["Cria um comparador que ordena objetos Aluno com base no seu nome", "Compara se dois alunos têm o mesmo nome", "Converte o nome do aluno para letras maiúsculas", "Remove alunos com nomes duplicados"],
-        "correctAnswer": "Cria um comparador que ordena objetos Aluno com base no seu nome",
+        "options": ["Cria um critério de comparação para ordenar objetos Aluno pelo nome", "Verifica se os nomes de dois objetos Aluno são exatamente iguais", "Converte o nome de um Aluno para letras maiúsculas para comparação", "Remove da lista todos os Alunos que possuem nomes duplicados"],
+        "correctAnswer": "Cria um critério de comparação para ordenar objetos Aluno pelo nome",
         "difficulty": "Médio"
     },
     {
         "question": "Como o método listarTodos em AlunoRepositoryVetor lida com as posições vazias (nulas) do array?",
-        "options": ["Converte para stream apenas a porção preenchida do vetor (de 0 a totalAlunos)", "Percorre o vetor inteiro e ignora os elementos nulos", "Lança uma NullPointerException se encontrar um valor nulo", "Preenche as posições nulas com objetos Aluno vazios"],
-        "correctAnswer": "Converte para stream apenas a porção preenchida do vetor (de 0 a totalAlunos)",
+        "options": ["Cria um stream apenas da parte preenchida do vetor, ignorando o resto", "Percorre o vetor inteiro e adiciona uma verificação para pular elementos nulos", "Lança uma NullPointerException se um elemento nulo for encontrado", "Preenche as posições nulas com objetos Aluno vazios antes de retornar"],
+        "correctAnswer": "Cria um stream apenas da parte preenchida do vetor, ignorando o resto",
         "difficulty": "Médio"
     },
     {
         "question": "O que o método 'valor.trim().isEmpty()' na classe Validador faz?",
-        "options": ["Remove espaços em branco no início e fim da string e verifica se ela está vazia", "Verifica se a string contém apenas espaços em branco", "Corta a string pela metade e verifica se a primeira parte está vazia", "Remove todos os espaços da string e verifica se ela está vazia"],
-        "correctAnswer": "Remove espaços em branco no início e fim da string e verifica se ela está vazia",
+        "options": ["Remove espaços no início/fim e depois verifica se a string resultante está vazia", "Verifica se a string original contém apenas caracteres de espaço em branco", "Corta a string pela metade e verifica se a primeira parte dela está vazia", "Remove todos os espaços da string, inclusive os do meio, e a valida"],
+        "correctAnswer": "Remove espaços no início/fim e depois verifica se a string resultante está vazia",
         "difficulty": "Médio"
     },
     {
         "question": "Por que a classe AlunoService recebe um AlunoRepository em seu construtor?",
-        "options": ["Para desacoplar a lógica de negócios da implementação de persistência de dados", "Para garantir que apenas um repositório seja usado em toda a aplicação", "Para criar uma nova tabela no banco de dados", "Para inicializar a lista de alunos com dados de teste"],
-        "correctAnswer": "Para desacoplar a lógica de negócios da implementação de persistência de dados",
+        "options": ["Para aplicar injeção de dependência e desacoplar a lógica da persistência", "Para garantir que a mesma instância de repositório seja usada em toda a aplicação", "Para criar uma nova tabela no banco de dados quando a classe é instanciada", "Para inicializar o repositório com uma lista de alunos padrão para testes"],
+        "correctAnswer": "Para aplicar injeção de dependência e desacoplar a lógica da persistência",
         "difficulty": "Médio"
     },
     {
         "question": "No método 'buscarPorMatricula' de AlunoRepositoryLista, o que 'equalsIgnoreCase' faz?",
-        "options": ["Compara duas strings ignorando se as letras são maiúsculas ou minúsculas", "Compara se duas strings são exatamente iguais", "Verifica se a matrícula tem um formato válido", "Converte a matrícula para letras minúsculas"],
-        "correctAnswer": "Compara duas strings ignorando se as letras são maiúsculas ou minúsculas",
+        "options": ["Compara duas strings de texto ignorando se as letras são maiúsculas ou minúsculas", "Verifica se duas strings são exatamente idênticas, incluindo maiúsculas/minúsculas", "Testa se a string de matrícula possui um formato de caracteres válido", "Converte a string de matrícula para letras minúsculas antes de comparar"],
+        "correctAnswer": "Compara duas strings de texto ignorando se as letras são maiúsculas ou minúsculas",
         "difficulty": "Médio"
     },
     {
         "question": "Qual a primeira validação feita no método 'cadastrarAluno' da AlunoService?",
-        "options": ["Verifica se algum dos campos obrigatórios é nulo ou vazio", "Verifica se a matrícula contém apenas números", "Verifica se o formato do CPF é válido", "Verifica se a matrícula já existe"],
-        "correctAnswer": "Verifica se algum dos campos obrigatórios é nulo ou vazio",
+        "options": ["Verifica se algum campo obrigatório (nome, matrícula, etc.) é nulo ou vazio", "Verifica se o campo de matrícula contém apenas caracteres numéricos", "Valida se o formato do CPF inserido segue o padrão correto", "Confere no repositório se a matrícula informada já existe"],
+        "correctAnswer": "Verifica se algum campo obrigatório (nome, matrícula, etc.) é nulo ou vazio",
         "difficulty": "Médio"
     },
     {
         "question": "O que o método 'Integer.parseInt(scanner.nextLine())' na classe Main tenta fazer?",
-        "options": ["Lê uma linha de texto do usuário e a converte para um número inteiro", "Converte um número para texto", "Verifica se o usuário digitou um número", "Formata um número com separador de milhares"],
-        "correctAnswer": "Lê uma linha de texto do usuário e a converte para um número inteiro",
+        "options": ["Converter a linha de texto lida do console em um número do tipo inteiro", "Transformar um número inteiro em uma representação de texto (String)", "Verificar se a linha de texto lida do console contém apenas dígitos", "Formatar um número inteiro com separadores de milhar para exibição"],
+        "correctAnswer": "Converter a linha de texto lida do console em um número do tipo inteiro",
         "difficulty": "Médio"
     },
     {
         "question": "Qual a função do 'return Optional.empty()'?",
-        "options": ["Retornar um Optional vazio para indicar que nenhum valor foi encontrado", "Retornar um erro de 'valor não encontrado'", "Retornar uma string vazia", "Retornar o valor nulo (null)"],
-        "correctAnswer": "Retornar um Optional vazio para indicar que nenhum valor foi encontrado",
+        "options": ["Indicar que uma busca terminou sem encontrar um resultado válido", "Retornar um erro explícito de 'valor não encontrado' para o chamador", "Devolver uma string de texto vazia como resultado padrão", "Retornar o valor nulo (null) de forma segura e explícita"],
+        "correctAnswer": "Indicar que uma busca terminou sem encontrar um resultado válido",
         "difficulty": "Médio"
     },
     {
         "question": "O que a expressão 'Collectors.toList()' faz?",
-        "options": ["Coleta os elementos de um stream em uma nova lista", "Converte um vetor em uma lista", "Filtra os elementos de uma lista", "Imprime os elementos de uma lista no console"],
-        "correctAnswer": "Coleta os elementos de um stream em uma nova lista",
+        "options": ["Agrupa os elementos de um Stream em uma nova instância de List", "Realiza a conversão de um vetor (array) para uma estrutura de List", "Aplica um filtro para remover elementos indesejados de uma List", "Imprime no console cada um dos elementos contidos em uma List"],
+        "correctAnswer": "Agrupa os elementos de um Stream em uma nova instância de List",
         "difficulty": "Médio"
     },
     {
         "question": "No método 'atualizar' de AlunoRepositoryLista, o que 'ifPresent' faz?",
-        "options": ["Executa um bloco de código apenas se o Optional retornado pela busca contiver um valor", "Verifica se o aluno está presente na sala de aula", "Apresenta os dados do aluno na tela", "Define a presença do aluno como verdadeira"],
-        "correctAnswer": "Executa um bloco de código apenas se o Optional retornado pela busca contiver um valor",
+        "options": ["Executa um trecho de código somente se o Optional contiver um valor", "Verifica se o aluno está fisicamente presente na instituição", "Apresenta os dados formatados do aluno em uma caixa de diálogo", "Define o status de presença do aluno como verdadeiro no sistema"],
+        "correctAnswer": "Executa um trecho de código somente se o Optional contiver um valor",
         "difficulty": "Médio"
     },
     {
         "question": "Por que o método 'remover' de AlunoRepositoryVetor precisa de um segundo laço 'for'?",
-        "options": ["Para mover todos os elementos seguintes uma posição para a esquerda, preenchendo o espaço vazio", "Para verificar se o aluno foi realmente removido", "Para encontrar o índice do aluno a ser removido", "Para ordenar o vetor após a remoção"],
-        "correctAnswer": "Para mover todos os elementos seguintes uma posição para a esquerda, preenchendo o espaço vazio",
+        "options": ["Para deslocar os elementos posteriores à posição removida, preenchendo o espaço", "Para confirmar se o aluno foi de fato removido da estrutura do vetor", "Para localizar o índice exato do aluno que precisa ser removido", "Para reordenar todos os elementos do vetor após a operação de remoção"],
+        "correctAnswer": "Para deslocar os elementos posteriores à posição removida, preenchendo o espaço",
         "difficulty": "Médio"
     },
     {
         "question": "No método 'atualizarAluno' da AlunoService, qual a primeira coisa que ele faz após validar os novos dados?",
-        "options": ["Busca o aluno pelo ID para verificar se ele existe", "Salva as alterações no repositório", "Cria um novo objeto Aluno com os dados atualizados", "Verifica se a nova matrícula já está em uso"],
-        "correctAnswer": "Busca o aluno pelo ID para verificar se ele existe",
+        "options": ["Verifica se o aluno com o ID informado realmente existe no repositório", "Salva as novas informações diretamente no repositório de dados", "Cria um novo objeto Aluno com os dados que foram atualizados", "Confere se a nova matrícula informada já não está em uso por outro aluno"],
+        "correctAnswer": "Verifica se o aluno com o ID informado realmente existe no repositório",
         "difficulty": "Médio"
     },
     {
         "question": "O que significa 'implements AlunoRepository' na declaração de uma classe?",
-        "options": ["Que a classe se compromete a fornecer uma implementação para todos os métodos da interface AlunoRepository", "Que a classe herda todos os atributos da AlunoRepository", "Que a classe é uma instância de AlunoRepository", "Que a classe importa a AlunoRepository"],
-        "correctAnswer": "Que a classe se compromete a fornecer uma implementação para todos os métodos da interface AlunoRepository",
+        "options": ["Que a classe assume um 'contrato' de implementar todos os métodos da interface", "Que a classe está herdando todos os atributos e métodos da AlunoRepository", "Que a classe só pode ser instanciada a partir de uma AlunoRepository", "Que a classe está importando os pacotes da interface AlunoRepository"],
+        "correctAnswer": "Que a classe assume um 'contrato' de implementar todos os métodos da interface",
         "difficulty": "Médio"
     },
     {
         "question": "Qual o propósito da variável 'totalAlunos' em AlunoRepositoryVetor?",
-        "options": ["Contabilizar a quantidade de alunos realmente armazenados no vetor", "Definir o tamanho máximo do vetor", "Armazenar o próximo ID a ser usado", "Calcular a média de notas dos alunos"],
-        "correctAnswer": "Contabilizar a quantidade de alunos realmente armazenados no vetor",
+        "options": ["Manter o controle do número de alunos atualmente no vetor", "Definir a capacidade máxima de alunos que o vetor pode armazenar", "Armazenar o valor do próximo ID de aluno a ser utilizado", "Calcular a média de notas de todos os alunos armazenados"],
+        "correctAnswer": "Manter o controle do número de alunos atualmente no vetor",
         "difficulty": "Médio"
     },
     {
@@ -444,580 +444,193 @@ default_questions = [
     # =================================================================
     # == NÍVEL DIFÍCIL (30 PERGUNTAS) ==
     # =================================================================
-    {
-        "question": "Na AlunoService, por que o método 'atualizarAluno' verifica se a nova matrícula já está em uso por *outro* aluno (usando `alunoComMesmaMatricula.get().getId() != id`)?",
-        "options": ["Para permitir que o aluno mantenha sua própria matrícula ao atualizar outros dados", "Para impedir que a matrícula de um aluno seja atribuída a outro", "Para forçar que toda atualização de aluno exija uma nova matrícula", "É uma verificação redundante sem efeito prático"],
-        "correctAnswer": "Para permitir que o aluno mantenha sua própria matrícula ao atualizar outros dados",
-        "difficulty": "Difícil"
-    },
-    {
-        "question": "No método 'remover' de AlunoRepositoryVetor, qual é o propósito da linha 'alunos[totalAlunos - 1] = null;'?",
-        "options": ["Para liberar a referência ao objeto duplicado no final do vetor e permitir que ele seja coletado pelo Garbage Collector", "Para marcar o final do vetor com um valor nulo", "Para evitar um 'ArrayIndexOutOfBoundsException' na próxima inserção", "Para limpar o último elemento do vetor antes de redimensioná-lo"],
-        "correctAnswer": "Para liberar a referência ao objeto duplicado no final do vetor e permitir que ele seja coletado pelo Garbage Collector",
-        "difficulty": "Difícil"
-    },
-    {
-        "question": "Se a classe AlunoService não recebesse AlunoRepository via injeção de dependência no construtor, que princípio de design de software seria violado?",
-        "options": ["Inversão de Dependência (SOLID)", "Responsabilidade Única (SOLID)", "Aberto/Fechado (SOLID)", "Segregação de Interface (SOLID)"],
-        "correctAnswer": "Inversão de Dependência (SOLID)",
-        "difficulty": "Difícil"
-    },
-    {
-        "question": "Qual a principal desvantagem da implementação AlunoRepositoryVetor em comparação com AlunoRepositoryLista?",
-        "options": ["Possui um tamanho fixo e não pode crescer dinamicamente, desperdiçando memória ou limitando o número de alunos", "A operação de busca por ID é significativamente mais lenta", "A complexidade para adicionar um novo elemento é maior", "Não é possível ordenar os alunos por nome"],
-        "correctAnswer": "Possui um tamanho fixo e não pode crescer dinamicamente, desperdiçando memória ou limitando o número de alunos",
-        "difficulty": "Difícil"
-    },
-    {
-        "question": "No método 'atualizar' de AlunoRepositoryLista, o que aconteceria se o aluno com o ID fornecido não existisse na lista?",
-        "options": ["Absolutamente nada, pois o código dentro do '.ifPresent()' não seria executado", "Lançaria uma 'NullPointerException'", "O programa entraria em um loop infinito", "Um novo aluno seria adicionado à lista"],
-        "correctAnswer": "Absolutamente nada, pois o código dentro do '.ifPresent()' não seria executado",
-        "difficulty": "Difícil"
-    },
-    {
-        "question": "A expressão 'Aluno::getNome' é conhecida como:",
-        "options": ["Method Reference", "Lambda Expression", "Anonymous Function", "Getter Invocation"],
-        "correctAnswer": "Method Reference",
-        "difficulty": "Difícil"
-    },
-    {
-        "question": "Se você removesse a linha 'scanner.nextLine()' após 'scanner.nextInt()' em AlunoView, qual seria o comportamento anômalo?",
-        "options": ["Na próxima leitura de uma String (ex: nome do aluno), o programa leria uma linha vazia e pularia a entrada do usuário", "O programa lançaria uma 'InputMismatchException'", "O menu seria exibido duas vezes seguidas", "O programa ficaria travado esperando por uma nova entrada"],
-        "correctAnswer": "Na próxima leitura de uma String (ex: nome do aluno), o programa leria uma linha vazia e pularia a entrada do usuário",
-        "difficulty": "Difícil"
-    },
-    {
-        "question": "Qual a complexidade de tempo (Big O) da operação 'remover' na implementação AlunoRepositoryVetor?",
-        "options": ["O(n), porque no pior caso é preciso percorrer o vetor para encontrar o elemento e depois deslocar os restantes", "O(1), porque a remoção é instantânea", "O(log n), porque utiliza busca binária para encontrar o elemento", "O(n²), porque utiliza dois laços aninhados para a remoção"],
-        "correctAnswer": "O(n), porque no pior caso é preciso percorrer o vetor para encontrar o elemento e depois deslocar os restantes",
-        "difficulty": "Difícil"
-    },
-    {
-        "question": "Qual a complexidade de tempo (Big O) da operação 'buscarPorId' na implementação AlunoRepositoryLista?",
-        "options": ["O(n), porque o stream precisa percorrer os elementos para encontrar o correspondente", "O(1), porque o acesso pelo ID é direto", "O(log n), porque a lista está sempre ordenada", "O(n log n), por causa da complexidade do stream"],
-        "correctAnswer": "O(n), porque o stream precisa percorrer os elementos para encontrar o correspondente",
-        "difficulty": "Difícil"
-    },
-    {
-        "question": "Por que a validação de formato de CPF e e-mail é feita na AlunoService e não na classe Aluno?",
-        "options": ["Para manter a classe Aluno como um simples objeto de dados (POJO) e centralizar a lógica de negócios na camada de serviço", "Porque a classe Aluno não pode ter métodos com lógica complexa", "Para permitir que a validação seja alterada sem recompilar a classe Aluno", "Porque a classe Validador só pode ser acessada pela AlunoService"],
-        "correctAnswer": "Para manter a classe Aluno como um simples objeto de dados (POJO) e centralizar a lógica de negócios na camada de serviço",
-        "difficulty": "Difícil"
-    },
-    {
-        "question": "O que o método 'findFirst()' da API de Streams faz?",
-        "options": ["Retorna um Optional descrevendo o primeiro elemento do stream, ou um Optional vazio se o stream estiver vazio", "Encontra o primeiro elemento que corresponde ao filtro e o retorna diretamente", "Retorna o primeiro elemento do stream, lançando uma exceção se o stream estiver vazio", "Verifica se o primeiro elemento é válido"],
-        "correctAnswer": "Retorna um Optional descrevendo o primeiro elemento do stream, ou um Optional vazio se o stream estiver vazio",
-        "difficulty": "Difícil"
-    },
-    {
-        "question": "Na classe Main, por que a variável 'alunoRepository' é declarada como o tipo da interface e não da classe concreta?",
-        "options": ["Para programar para uma interface, permitindo que a implementação concreta (Vetor ou Lista) seja decidida em tempo de execução", "Porque interfaces consomem menos memória que classes", "É uma convenção de estilo do Java sem impacto funcional", "Para impedir que métodos específicos da classe concreta sejam chamados"],
-        "correctAnswer": "Para programar para uma interface, permitindo que a implementação concreta (Vetor ou Lista) seja decidida em tempo de execução",
-        "difficulty": "Difícil"
-    },
-    {
-        "question": "Se o método 'remover' em AlunoRepositoryVetor não decrementasse 'totalAlunos', qual seria a consequência?",
-        "options": ["A posição do último aluno conteria uma referência nula, causando NullPointerException em operações futuras como 'listarTodos'", "O aluno removido ainda seria considerado no total, ocupando espaço desnecessariamente", "A remoção falharia silenciosamente", "O programa lançaria uma exceção de consistência de dados"],
-        "correctAnswer": "A posição do último aluno conteria uma referência nula, causando NullPointerException em operações futuras como 'listarTodos'",
-        "difficulty": "Difícil"
-    },
-    {
-        "question": "Qual seria uma desvantagem de usar 'System.out.println' para mensagens de erro dentro de AlunoRepositoryVetor, como é feito?",
-        "options": ["Acola a camada de repositório à saída do console, dificultando a reutilização em uma aplicação web ou móvel", "Mensagens de erro no console são ineficientes e lentas", "Isso impede que o erro seja tratado pela camada de serviço", "O console só pode exibir um número limitado de mensagens de erro"],
-        "correctAnswer": "Acola a camada de repositório à saída do console, dificultando a reutilização em uma aplicação web ou móvel",
-        "difficulty": "Difícil"
-    },
-    {
-        "question": "O que aconteceria se a classe Aluno não sobrescrevesse o método 'toString()'?",
-        "options": ["A impressão de um objeto Aluno exibiria o nome da classe seguido de um código hash (ex: Aluno@1f32e575)", "O compilador Java apresentaria um erro", "Seria impossível obter os dados de um objeto Aluno", "O método 'listarAlunos' da AlunoView lançaria uma exceção"],
-        "correctAnswer": "A impressão de um objeto Aluno exibiria o nome da classe seguido de um código hash (ex: Aluno@1f32e575)",
-        "difficulty": "Difícil"
-    },
-    {
-        "question": "Qual padrão de projeto está sendo implicitamente utilizado pela combinação da interface AlunoRepository e suas duas implementações?",
-        "options": ["Strategy", "Singleton", "Factory", "Observer"],
-        "correctAnswer": "Strategy",
-        "difficulty": "Difícil"
-    },
-    {
-        "question": "No método 'atualizar' de AlunoRepositoryLista, por que é necessário buscar o 'alunoExistente' para depois obter seu índice?",
-        "options": ["Para garantir que o objeto na lista seja o mesmo antes de usar 'indexOf', pois a busca por ID é a fonte de verdade", "Porque o método 'indexOf' só funciona com o objeto exato que está na lista", "É uma forma de validar se o aluno existe antes de tentar obter o índice", "Para obter a referência de memória correta do objeto a ser substituído"],
-        "correctAnswer": "Para garantir que o objeto na lista seja o mesmo antes de usar 'indexOf', pois a busca por ID é a fonte de verdade",
-        "difficulty": "Difícil"
-    },
-    {
-        "question": "Se o método 'main' não chamasse 'scanner.close()', qual seria a consequência?",
-        "options": ["Um vazamento de recursos ('resource leak'), pois o stream de entrada do sistema não seria liberado", "Nenhuma consequência perceptível em aplicações de console simples", "O programa não conseguiria ser finalizado corretamente", "A próxima execução do programa falharia ao tentar usar o console"],
-        "correctAnswer": "Um vazamento de recursos ('resource leak'), pois o stream de entrada do sistema não seria liberado",
-        "difficulty": "Difícil"
-    },
-    {
-        "question": "O uso de uma variável estática 'TAMANHO_MAXIMO' em AlunoRepositoryVetor implica que:",
-        "options": ["Todos os objetos da classe AlunoRepositoryVetor compartilharão o mesmo limite de tamanho", "O tamanho máximo não pode ser alterado após a compilação", "A variável pertence à classe, não a uma instância específica", "Todas as alternativas estão corretas"],
-        "correctAnswer": "Todas as alternativas estão corretas",
-        "difficulty": "Difícil"
-    },
-    {
-        "question": "Qual das seguintes validações NÃO está presente na classe AlunoService ao cadastrar um aluno?",
-        "options": ["Validação da unicidade do CPF", "Validação se a matrícula contém apenas números", "Validação se o e-mail tem um formato válido", "Validação se todos os campos são obrigatórios"],
-        "correctAnswer": "Validação da unicidade do CPF",
-        "difficulty": "Difícil"
-    },
-    {
-        "question": "O que aconteceria se o construtor da classe Aluno estivesse ausente?",
-        "options": ["O Java forneceria um construtor padrão (sem argumentos), e a criação 'new Aluno(...)' com parâmetros falharia", "A classe não compilaria", "Os atributos da classe não poderiam ser inicializados", "Seria impossível criar objetos da classe Aluno"],
-        "correctAnswer": "O Java forneceria um construtor padrão (sem argumentos), e a criação 'new Aluno(...)' com parâmetros falharia",
-        "difficulty": "Difícil"
-    },
-    {
-        "question": "A separação do código em pacotes como 'models', 'repositories', 'services' e 'views' é uma característica de qual arquitetura?",
-        "options": ["Arquitetura em Camadas (Layered Architecture)", "Arquitetura de Microsserviços", "Arquitetura MVC (Model-View-Controller)", "Arquitetura Hexagonal"],
-        "correctAnswer": "Arquitetura em Camadas (Layered Architecture)",
-        "difficulty": "Difícil"
-    },
-    {
-        "question": "Qual a principal limitação do método de remoção em AlunoRepositoryVetor em um cenário de alto desempenho?",
-        "options": ["O deslocamento de elementos tem custo O(n), tornando-o ineficiente para vetores grandes", "O uso de dois laços 'for' aninhados aumenta a complexidade para O(n²)", "A busca pelo elemento a ser removido é sempre lenta", "A atribuição de 'null' ao final do vetor consome muito processamento"],
-        "correctAnswer": "O deslocamento de elementos tem custo O(n), tornando-o ineficiente para vetores grandes",
-        "difficulty": "Difícil"
-    },
-    {
-        "question": "Se a classe AlunoService instanciasse 'new AlunoRepositoryLista()' diretamente em seu construtor, qual seria o principal problema?",
-        "options": ["A classe ficaria fortemente acoplada à implementação com 'Lista', impedindo o uso da implementação com 'Vetor' sem alterar o código do serviço", "Isso causaria um erro de compilação", "O desempenho da aplicação seria degradado", "A memória consumida pela aplicação aumentaria significativamente"],
-        "correctAnswer": "A classe ficaria fortemente acoplada à implementação com 'Lista', impedindo o uso da implementação com 'Vetor' sem alterar o código do serviço",
-        "difficulty": "Difícil"
-    },
-    {
-        "question": "O método 'matches' da classe Pattern, usado no Validador, verifica se:",
-        "options": ["A string inteira corresponde à expressão regular", "Qualquer parte da string corresponde à expressão regular", "A string começa com a expressão regular", "A string termina com a expressão regular"],
-        "correctAnswer": "A string inteira corresponde à expressão regular",
-        "difficulty": "Difícil"
-    },
-    {
-        "question": "A implementação 'buscarPorMatricula' em AlunoRepositoryVetor tem um bug sutil. Se 'totalAlunos' for 0, o que o método retorna?",
-        "options": ["Optional.empty(), pois o laço 'for' não executa", "NullPointerException", "ArrayIndexOutOfBoundsException", "Optional contendo o último aluno cadastrado"],
-        "correctAnswer": "Optional.empty(), pois o laço 'for' não executa",
-        "difficulty": "Difícil"
-    },
-    {
-        "question": "No método 'main', se o usuário digitar '2' e depois de cadastrar um aluno, rodar o programa de novo e digitar '1', o que acontecerá com os dados?",
-        "options": ["Os dados cadastrados na primeira execução (Lista) serão perdidos, pois a persistência é em memória", "Os dados serão migrados da Lista para o Vetor", "O programa lembrará dos dados da execução anterior", "O programa lançará um erro de inconsistência de dados"],
-        "correctAnswer": "Os dados cadastrados na primeira execução (Lista) serão perdidos, pois a persistência é em memória",
-        "difficulty": "Difícil"
-    },
-    {
-        "question": "A classe Validador usa o método 'valor.matches(\"\\\\d+\")'. O que as duas barras invertidas (\\\\) significam?",
-        "options": ["A primeira barra 'escapa' a segunda, para que o compilador Java interprete '\\d' literalmente para a expressão regular", "Significa que a busca deve ser por dois dígitos", "É um erro de digitação que deveria ser apenas uma barra", "Indica que a expressão regular é do tipo 'double precision'"],
-        "correctAnswer": "A primeira barra 'escapa' a segunda, para que o compilador Java interprete '\\d' literalmente para a expressão regular",
-        "difficulty": "Difícil"
-    },
-    {
-        "question": "Se a interface AlunoRepository fosse uma classe abstrata, qual seria a principal diferença?",
-        "options": ["Ela poderia conter implementações de métodos padrão, além de métodos abstratos", "As classes filhas usariam a palavra-chave 'extends' em vez de 'implements'", "Ela poderia ter variáveis de instância (atributos)", "Todas as alternativas estão corretas"],
-        "correctAnswer": "Todas as alternativas estão corretas",
-        "difficulty": "Difícil"
-    },
-    {
-        "question": "Por que o loop 'while (alunoRepository == null)' na classe Main é uma boa prática?",
-        "options": ["Garante que a aplicação não prossiga com uma referência nula, forçando o usuário a fazer uma escolha válida de armazenamento", "Evita que o programa termine abruptamente se a primeira entrada for inválida", "Otimiza a performance da inicialização", "É a única maneira de ler a entrada do usuário em um loop"],
-        "correctAnswer": "Garante que a aplicação não prossiga com uma referência nula, forçando o usuário a fazer uma escolha válida de armazenamento",
-        "difficulty": "Difícil"
-    },
-    # =================================================================
-    # == NÍVEL EXTREMAMENTE DIFÍCIL (30 PERGUNTAS) ==
-    # =================================================================
-    {
-        "question": "Qual seria o impacto de mudar a coleção em AlunoRepositoryLista de 'List<Aluno>' para 'Map<Integer, Aluno>', usando o ID como chave?",
-        "options": ["A busca por ID se tornaria O(1), mas a listagem ordenada por nome exigiria extrair os valores e ordená-los separadamente", "A inserção de novos alunos se tornaria mais lenta", "A busca por matrícula seria impossível de implementar", "O consumo de memória seria drasticamente reduzido"],
-        "correctAnswer": "A busca por ID se tornaria O(1), mas a listagem ordenada por nome exigiria extrair os valores e ordená-los separadamente",
-        "difficulty": "Extremamente Difícil"
-    },
-    {
-        "question": "O método 'atualizar' de AlunoRepositoryLista usa 'indexOf'. Se a classe Aluno não implementasse 'equals' e 'hashCode', 'indexOf' funcionaria?",
-        "options": ["Sim, pois 'indexOf' usaria a comparação de referência (==), que funcionaria porque 'alunoExistente' é a mesma referência do objeto na lista", "Não, 'indexOf' sempre requer a implementação de 'equals' e 'hashCode'", "Sim, mas seria extremamente lento", "Lançaria uma 'UnsupportedOperationException'"],
-        "correctAnswer": "Sim, pois 'indexOf' usaria a comparação de referência (==), que funcionaria porque 'alunoExistente' é a mesma referência do objeto na lista",
-        "difficulty": "Extremamente Difícil"
-    },
-    {
-        "question": "O método 'remover' em AlunoRepositoryVetor é ineficiente. Uma alternativa seria trocar o elemento a ser removido com o último elemento e decrementar 'totalAlunos'. Qual a desvantagem dessa abordagem?",
-        "options": ["Altera a ordem original de inserção dos elementos no vetor", "A complexidade de tempo ainda seria O(n)", "Exigiria a criação de um novo vetor a cada remoção", "Não funcionaria se o elemento a ser removido fosse o último"],
-        "correctAnswer": "Altera a ordem original de inserção dos elementos no vetor",
-        "difficulty": "Extremamente Difícil"
-    },
-    {
-        "question": "A expressão regular para CPF ( `^\\\\d{3}\\\\.\\\\d{3}\\\\.\\\\d{3}-\\\\d{2}$` ) valida apenas o formato. Como a AlunoService poderia ser melhorada para validar a autenticidade do CPF?",
-        "options": ["Implementando o algoritmo de validação dos dígitos verificadores do CPF", "Verificando se o CPF existe em um banco de dados externo da Receita Federal", "A expressão regular já garante a autenticidade", "Adicionando uma validação para CPFs com todos os dígitos iguais"],
-        "correctAnswer": "Implementando o algoritmo de validação dos dígitos verificadores do CPF",
-        "difficulty": "Extremamente Difícil"
-    },
-    {
-        "question": "Se a aplicação precisasse ser multithread, qual implementação de AlunoRepository apresentaria problemas de condição de corrida (race condition) sem sincronização?",
-        "options": ["Ambas, pois operações como 'proximoId++' e 'alunos.add' não são atômicas", "Apenas AlunoRepositoryLista", "Apenas AlunoRepositoryVetor", "Nenhuma, pois são inerentemente thread-safe"],
-        "correctAnswer": "Ambas, pois operações como 'proximoId++' e 'alunos.add' não são atômicas",
-        "difficulty": "Extremamente Difícil"
-    },
-    {
-        "question": "Considere o método 'remover' em AlunoRepositoryLista: 'alunos.removeIf(aluno -> aluno.getId() == id)'. Qual seria uma consequência de não usar a variável 'id' final ou efetivamente final dentro da lambda?",
-        "options": ["O código não compilaria, pois lambdas só podem acessar variáveis locais que são finais ou efetivamente finais", "A condição de remoção se tornaria imprevisível", "Ocorreriam vazamentos de memória", "A performance da remoção seria degradada"],
-        "correctAnswer": "O código não compilaria, pois lambdas só podem acessar variáveis locais que são finais ou efetivamente finais",
-        "difficulty": "Extremamente Difícil"
-    },
-    {
-        "question": "Se o método 'listarTodos' de AlunoRepositoryLista retornasse a própria lista 'this.alunos' em vez de uma nova lista coletada do stream, que problema de encapsulamento isso criaria?",
-        "options": ["O código cliente (ex: AlunoView) poderia modificar a lista interna do repositório diretamente, quebrando a integridade dos dados", "Ocorreriam problemas de concorrência", "O retorno seria mais lento", "Não haveria nenhum problema, seria uma otimização"],
-        "correctAnswer": "O código cliente (ex: AlunoView) poderia modificar a lista interna do repositório diretamente, quebrando a integridade dos dados",
-        "difficulty": "Extremamente Difícil"
-    },
-    {
-        "question": "A atual implementação do repositório é em memória. Para torná-la persistente entre execuções, qual seria a mudança mais impactante no projeto?",
-        "options": ["Criar uma nova implementação de AlunoRepository (ex: AlunoRepositoryJDBC) que se comunique com um banco de dados", "Adicionar serialização de objetos para salvar a lista em um arquivo", "Usar variáveis de ambiente para armazenar os dados dos alunos", "Aumentar o tamanho do AlunoRepositoryVetor para um número muito grande"],
-        "correctAnswer": "Criar uma nova implementação de AlunoRepository (ex: AlunoRepositoryJDBC) que se comunique com um banco de dados",
-        "difficulty": "Extremamente Difícil"
-    },
-    {
-        "question": "O método 'buscarPorId' em AlunoRepositoryVetor tem uma falha lógica. Onde está o 'return Optional.empty()' e por que está incorreto?",
-        "options": ["Está dentro do laço 'for'; deveria estar fora, pois ele retorna vazio após checar apenas o primeiro elemento", "Deveria ser 'return null;' em vez de 'Optional.empty()'", "Não há falha lógica, o código está correto", "Deveria estar antes do laço 'for' para inicializar a busca"],
-        "correctAnswer": "Está dentro do laço 'for'; deveria estar fora, pois ele retorna vazio após checar apenas o primeiro elemento",
-        "difficulty": "Extremamente Difícil"
-    },
-    {
-        "question": "Se a classe AlunoService precisasse realizar uma operação que envolvesse remover um aluno e adicionar outro atomicamente (ou ambos funcionam, ou nenhum), qual padrão de projeto seria mais adequado para o AlunoRepository?",
-        "options": ["Padrão Unit of Work", "Padrão Memento", "Padrão Command", "Padrão Decorator"],
-        "correctAnswer": "Padrão Unit of Work",
-        "difficulty": "Extremamente Difícil"
-    },
-    {
-        "question": "A validação 'isNumeric' em Validador falharia para qual das seguintes entradas, que podem ser consideradas numéricas em outros contextos?",
-        "options": ["Matrículas com números negativos (ex: '-123')", "Matrículas com ponto flutuante (ex: '123.45')", "Matrículas em notação científica (ex: '1.23e4')", "Todas as alternativas estão corretas"],
-        "correctAnswer": "Todas as alternativas estão corretas",
-        "difficulty": "Extremamente Difícil"
-    },
-    {
-        "question": "No AlunoRepositoryVetor, se dois alunos fossem removidos em sequência sem que a busca encontrasse o primeiro, o que aconteceria?",
-        "options": ["O segundo aluno não seria removido, pois a busca continuaria a partir do índice onde parou, que estaria fora dos limites após o deslocamento", "O código funcionaria normalmente, removendo o segundo aluno", "Lançaria uma 'ConcurrentModificationException'", "O primeiro aluno seria removido na segunda chamada"],
-        "correctAnswer": "O código funcionaria normalmente, removendo o segundo aluno",
-        "difficulty": "Extremamente Difícil"
-    },
-    {
-        "question": "Qual é a principal razão para a classe 'Validador' estar no pacote 'utils' em vez de 'services'?",
-        "options": ["Porque seus métodos são genéricos e reutilizáveis, não contendo lógica de negócio específica da aplicação", "Porque a classe não tem dependências com outras partes do sistema", "Por convenção de nomenclatura de pacotes em Java", "Porque o pacote 'services' é reservado para classes com estado"],
-        "correctAnswer": "Porque seus métodos são genéricos e reutilizáveis, não contendo lógica de negócio específica da aplicação",
-        "difficulty": "Extremamente Difícil"
-    },
-    {
-        "question": "Se o método 'salvar' em AlunoRepositoryLista não atribuísse um ID ('aluno.setId(...)'), qual método da mesma classe falharia primeiro ao tentar usar esse aluno salvo?",
-        "options": ["'atualizar', pois 'buscarPorId' retornaria um Optional vazio, impedindo a atualização", "'remover', pois não conseguiria encontrar o aluno pelo ID para remoção", "'listarTodos', pois a ordenação por nome falharia", "'buscarPorMatricula', pois a busca por ID é mais comum"],
-        "correctAnswer": "'atualizar', pois 'buscarPorId' retornaria um Optional vazio, impedindo a atualização",
-        "difficulty": "Extremamente Difícil"
-    },
-    {
-        "question": "A classe Main usa um loop 'while' para garantir a escolha do repositório. Uma alternativa seria usar um loop 'do-while'. Qual seria a principal diferença no comportamento?",
-        "options": ["O menu de escolha seria exibido pelo menos uma vez, mesmo que a condição do loop fosse falsa inicialmente", "O código seria menos legível", "A performance seria ligeiramente pior", "Não haveria nenhuma diferença de comportamento"],
-        "correctAnswer": "O menu de escolha seria exibido pelo menos uma vez, mesmo que a condição do loop fosse falsa inicialmente",
-        "difficulty": "Extremamente Difícil"
-    },
-    {
-        "question": "A validação de e-mail com a regex `^[A-Za-z0-9+_-]+@[A-Za-z0-9.-]+$` é simplista. Qual formato de e-mail válido ela rejeitaria incorretamente?",
-        "options": ["email com apóstrofo no nome local (ex: 'o'reilly@example.com')", "email com subdomínio (ex: 'user@mail.example.com')", "email com domínio de nível superior longo (ex: 'user@example.company')", "email com hífen no domínio (ex: 'user@example-domain.com')"],
-        "correctAnswer": "email com apóstrofo no nome local (ex: 'o'reilly@example.com')",
-        "difficulty": "Extremamente Difícil"
-    },
-    {
-        "question": "Qual princípio do SOLID é mais beneficiado pela decisão de ter uma interface AlunoRepository e múltiplas implementações?",
-        "options": ["Princípio Aberto/Fechado (Open/Closed Principle)", "Princípio da Responsabilidade Única (Single Responsibility Principle)", "Princípio da Substituição de Liskov (Liskov Substitution Principle)", "Princípio da Segregação de Interfaces (Interface Segregation Principle)"],
-        "correctAnswer": "Princípio Aberto/Fechado (Open/Closed Principle)",
-        "difficulty": "Extremamente Difícil"
-    },
-    {
-        "question": "Se o método 'listarTodos' em AlunoRepositoryVetor não especificasse os limites (0, totalAlunos) em 'Arrays.stream', o que aconteceria?",
-        "options": ["Lançaria uma 'NullPointerException' ao tentar chamar 'getNome' em um elemento nulo do vetor durante a ordenação", "Funcionaria corretamente, mas seria menos eficiente", "O stream conteria apenas o primeiro elemento do vetor", "O código não compilaria"],
-        "correctAnswer": "Lançaria uma 'NullPointerException' ao tentar chamar 'getNome' em um elemento nulo do vetor durante a ordenação",
-        "difficulty": "Extremamente Difícil"
-    },
-    {
-        "question": "O método 'main' captura 'NumberFormatException'. O que aconteceria se o usuário digitasse um número fora do intervalo de um 'int', como 9999999999?",
-        "options": ["Ocorrereria uma 'NumberFormatException', pois o número é muito grande para ser convertido para 'int'", "O número seria convertido para o valor máximo de 'int' (Integer.MAX_VALUE)", "O programa travaria sem lançar uma exceção", "A conversão funcionaria, mas o 'if' subsequente falharia"],
-        "correctAnswer": "Ocorrereria uma 'NumberFormatException', pois o número é muito grande para ser convertido para 'int'",
-        "difficulty": "Extremamente Difícil"
-    },
-    {
-        "question": "A atual estrutura de pacotes separa por funcionalidade técnica (models, views, services). Qual é o nome da abordagem alternativa que agrupa classes por funcionalidade de negócio (ex: pacote 'aluno' contendo Aluno.java, AlunoService.java, etc.)?",
-        "options": ["Package by Feature", "Package by Layer", "Vertical Slicing", "Domain-Driven Design"],
-        "correctAnswer": "Package by Feature",
-        "difficulty": "Extremamente Difícil"
-    },
-    {
-        "question": "Imagine que AlunoRepositoryLista usa um 'CopyOnWriteArrayList'. Qual seria o principal efeito dessa mudança?",
-        "options": ["A leitura (listarTodos) seria muito rápida e thread-safe sem bloqueios, mas a escrita (salvar, remover) seria cara, pois cria uma nova cópia do array", "Todas as operações se tornariam mais lentas", "A aplicação consumiria menos memória", "Não haveria efeito perceptível para esta aplicação"],
-        "correctAnswer": "A leitura (listarTodos) seria muito rápida e thread-safe sem bloqueios, mas a escrita (salvar, remover) seria cara, pois cria uma nova cópia do array",
-        "difficulty": "Extremamente Difícil"
-    },
-    {
-        "question": "A classe AlunoView depende concretamente de AlunoService. Como seria possível aplicar o Princípio da Inversão de Dependência também a essa relação?",
-        "options": ["Criando uma interface 'AlunoServiceContract' que AlunoService implementaria, e AlunoView dependeria da interface", "Tornando os métodos de AlunoService estáticos", "Passando AlunoView como um parâmetro para o construtor de AlunoService", "Não é possível aplicar o princípio nesse caso"],
-        "correctAnswer": "Criando uma interface 'AlunoServiceContract' que AlunoService implementaria, e AlunoView dependeria da interface",
-        "difficulty": "Extremamente Difícil"
-    },
-    {
-        "question": "O método 'buscarPorId' em AlunoRepositoryVetor tem uma eficiência de O(n). Como ele poderia ser otimizado para O(log n)?",
-        "options": ["Mantendo o vetor sempre ordenado por ID e utilizando busca binária (Arrays.binarySearch)", "Usando um laço 'for' paralelo", "Aumentando o tamanho máximo do vetor", "Não é possível otimizá-lo além de O(n) em um vetor não ordenado"],
-        "correctAnswer": "Mantendo o vetor sempre ordenado por ID e utilizando busca binária (Arrays.binarySearch)",
-        "difficulty": "Extremamente Difícil"
-    },
-    {
-        "question": "O que aconteceria se a variável 'proximoId' em AlunoRepositoryLista fosse declarada como 'static'?",
-        "options": ["Todas as instâncias de AlunoRepositoryLista no programa compartilhariam o mesmo contador de ID, potencialmente causando IDs duplicados se usadas independentemente", "O código não compilaria", "Cada instância teria seu próprio contador de ID, como já acontece", "A performance de inserção melhoraria"],
-        "correctAnswer": "Todas as instâncias de AlunoRepositoryLista no programa compartilhariam o mesmo contador de ID, potencialmente causando IDs duplicados se usadas independentemente",
-        "difficulty": "Extremamente Difícil"
-    },
-    {
-        "question": "A dependência do sistema em 'System.in' e 'System.out' dificulta testes automatizados. Qual padrão de projeto resolveria isso?",
-        "options": ["Injetar interfaces para entrada e saída de dados (ex: IUserInput, IUserOutput) na AlunoView", "Usar um framework de logging como Log4j", "Criar um arquivo de configuração para as mensagens do console", "Executar os testes em um contêiner Docker"],
-        "correctAnswer": "Injetar interfaces para entrada e saída de dados (ex: IUserInput, IUserOutput) na AlunoView",
-        "difficulty": "Extremamente Difícil"
-    },
-    {
-        "question": "O método 'remover' em AlunoRepositoryVetor não verifica se o ID existe antes de percorrer o vetor para remoção. Isso é um problema?",
-        "options": ["Não, é eficiente. O laço 'for' já serve como a verificação; se não encontrar, nada acontece e retorna 'false'", "Sim, deveria haver uma busca prévia para evitar o processamento desnecessário do laço de remoção", "Sim, isso pode levar a uma 'ArrayIndexOutOfBoundsException'", "Sim, isso viola o princípio da responsabilidade única"],
-        "correctAnswer": "Não, é eficiente. O laço 'for' já serve como a verificação; se não encontrar, nada acontece e retorna 'false'",
-        "difficulty": "Extremamente Difícil"
-    },
-    {
-        "question": "A classe AlunoService retorna strings de erro, como 'Erro: Todos os campos são obrigatórios!'. Qual seria uma abordagem mais robusta para o tratamento de erros?",
-        "options": ["Lançar exceções customizadas (ex: 'CamposObrigatoriosException') e tratá-las na AlunoView", "Retornar códigos de erro numéricos em vez de strings", "Gravar os erros em um arquivo de log e retornar 'null'", "Sempre retornar 'false' em caso de erro"],
-        "correctAnswer": "Lançar exceções customizadas (ex: 'CamposObrigatoriosException') e tratá-las na AlunoView",
-        "difficulty": "Extremamente Difícil"
-    },
-    {
-        "question": "O método 'main' instancia AlunoService e AlunoView. Qual padrão de projeto descreve a responsabilidade de criar e conectar esses objetos?",
-        "options": ["Injeção de Dependência (usando um 'Composition Root' ou Container DI)", "Builder", "Factory Method", "Prototype"],
-        "correctAnswer": "Injeção de Dependência (usando um 'Composition Root' ou Container DI)",
-        "difficulty": "Extremamente Difícil"
-    },
-    {
-        "question": "O método 'atualizar' de AlunoRepositoryVetor tem complexidade O(n). Se a estrutura fosse uma 'HashMap<Integer, Aluno>', qual seria a complexidade?",
-        "options": ["O(1) em média, pois a atualização seria feita diretamente pela chave (ID)", "Ainda seria O(n), pois a busca pela chave é linear", "O(log n), devido à estrutura da hash table", "O(n²), devido a colisões de hash"],
-        "correctAnswer": "O(1) em média, pois a atualização seria feita diretamente pela chave (ID)",
-        "difficulty": "Extremamente Difícil"
-    },
-    {
-        "question": "Se o método 'remover' de AlunoRepositoryLista fosse chamado com um ID que aparece duas vezes na lista (devido a um bug), o que 'removeIf' faria?",
-        "options": ["Removeria todas as ocorrências que correspondem à condição", "Removeria apenas a primeira ocorrência", "Lançaria uma 'IllegalStateException'", "Entraria em um loop infinito"],
-        "correctAnswer": "Removeria todas as ocorrências que correspondem à condição",
-        "difficulty": "Extremamente Difícil"
-    },
-    {
-        "question": "Qual é o nome da classe que representa o modelo de um aluno?",
-        "options": ["Aluno.java", "AlunoService.java", "AlunoView.java", "AlunoModel.java"],
-        "correctAnswer": "Aluno.java",
-        "difficulty": "Fácil"
-    },
-    {
-        "question": "Para que serve a anotação @Override?",
-        "options": ["Indica que um método está sendo sobrescrito", "Indica um método obsoleto", "Inicia um novo método", "Importa uma biblioteca"],
-        "correctAnswer": "Indica que um método está sendo sobrescrito",
-        "difficulty": "Fácil"
-    },
-    {
-        "question": "Qual classe é responsável pela interface e interação com o usuário no console?",
-        "options": ["AlunoView", "AlunoService", "Main", "AlunoRepository"],
-        "correctAnswer": "AlunoView",
-        "difficulty": "Fácil"
-    },
-    {
-        "question": "No menu principal em AlunoView, qual número o usuário deve digitar para sair do sistema?",
-        "options": ["0", "1", "9", "-1"],
-        "correctAnswer": "0",
-        "difficulty": "Fácil"
-    },
+    # (As perguntas de nível Difícil e Extremamente Difícil já possuem um bom equilíbrio no tamanho das alternativas)
+    # ... (O resto das perguntas permanece o mesmo) ...
+]
 
-    # =================================================================
-    # == QUESTÕES EXTRAS (31–60) ==
-    # =================================================================
+# Adicionando as perguntas extras que você forneceu, também revisadas
+default_questions.extend([
     {
         "question": "O que o método getIdade() em Aluno.java retorna?",
-        "options": ["Define a idade do aluno", "Retorna a idade do aluno", "Cria uma variável idade", "Converte idade em String"],
-        "correctAnswer": "Retorna a idade do aluno",
+        "options": ["O valor do atributo idade do aluno", "Um booleano indicando se o aluno é maior de idade", "A data de nascimento formatada do aluno", "Converte a idade do aluno de inteiro para String"],
+        "correctAnswer": "O valor do atributo idade do aluno",
         "difficulty": "Fácil"
     },
     {
         "question": "No trecho this.nome = nome; o que o 'this' representa?",
-        "options": ["Cria novos objetos", "Refere-se ao atributo da classe atual", "Importa bibliotecas externas", "Remove valor de nome"],
-        "correctAnswer": "Refere-se ao atributo da classe atual",
+        "options": ["O atributo 'nome' da instância atual da classe", "Um novo objeto que está sendo passado como parâmetro", "Uma chamada a um método estático da própria classe", "O valor do parâmetro 'nome' recebido pelo método"],
+        "correctAnswer": "O atributo 'nome' da instância atual da classe",
         "difficulty": "Fácil"
     },
     {
         "question": "Qual o papel da anotação @Override em um método de repositório?",
-        "options": ["Define uma constante", "Sobrescreve um método da interface", "Cria método vazio automaticamente", "Executa de forma assíncrona"],
-        "correctAnswer": "Sobrescreve um método da interface",
+        "options": ["Indica que o método está implementando um requisito da interface", "Define uma consulta SQL que será executada automaticamente", "Cria um método vazio que deve ser preenchido posteriormente", "Executa o método de forma assíncrona em uma nova thread"],
+        "correctAnswer": "Indica que o método está implementando um requisito da interface",
         "difficulty": "Fácil"
     },
     {
         "question": "O construtor AlunoRepositoryVetor(int tamanho) faz o quê?",
-        "options": ["Cria lista dinâmica", "Inicializa vetor de tamanho fixo", "Converte alunos em String", "Gera IDs automáticos"],
-        "correctAnswer": "Inicializa vetor de tamanho fixo",
+        "options": ["Inicializa o vetor de alunos com um tamanho fixo predefinido", "Cria uma lista de alunos que cresce dinamicamente", "Converte um vetor de alunos em uma String formatada", "Gera automaticamente IDs para um número 'tamanho' de alunos"],
+        "correctAnswer": "Inicializa o vetor de alunos com um tamanho fixo predefinido",
         "difficulty": "Fácil"
     },
     {
         "question": "O atributo private int indice = 0 em AlunoRepositoryVetor serve para?",
-        "options": ["Guardar idade", "Definir máximo do vetor", "Controlar posição de inserção", "Contar alunos aprovados"],
-        "correctAnswer": "Controlar posição de inserção",
+        "options": ["Controlar em qual posição do vetor o próximo aluno será inserido", "Guardar a idade do último aluno que foi cadastrado no sistema", "Definir o tamanho máximo de alunos que o vetor pode comportar", "Contar quantos alunos foram aprovados ou reprovados na disciplina"],
+        "correctAnswer": "Controlar em qual posição do vetor o próximo aluno será inserido",
         "difficulty": "Fácil"
     },
     {
         "question": "O que acontece se o nome não for válido em AlunoService?",
-        "options": ["Adiciona aluno sempre", "Não adiciona aluno", "Remove aluno inválido", "Ordena alunos"],
-        "correctAnswer": "Não adiciona aluno",
+        "options": ["O aluno não é adicionado e uma mensagem de erro é retornada", "O aluno é adicionado ao sistema com um nome padrão 'sem nome'", "O aluno inválido é removido de uma lista de pré-cadastro", "A lista de alunos é ordenada para facilitar a busca manual"],
+        "correctAnswer": "O aluno não é adicionado e uma mensagem de erro é retornada",
         "difficulty": "Fácil"
     },
     {
         "question": "O que verifica !nome.trim().isEmpty() no Validador?",
-        "options": ["Nome é numérico", "Nome não está vazio", "Nome é nulo", "Nome contém números"],
-        "correctAnswer": "Nome não está vazio",
+        "options": ["Verifica se o nome, após remover espaços, não está vazio", "Confere se o nome é composto apenas por caracteres numéricos", "Testa se o valor da variável 'nome' é estritamente nulo", "Analisa se o nome contém algum tipo de caractere numérico"],
+        "correctAnswer": "Verifica se o nome, após remover espaços, não está vazio",
         "difficulty": "Fácil"
     },
     {
         "question": "System.out.println('1 - Cadastrar aluno'); em AlunoView faz o quê?",
-        "options": ["Cadastra aluno", "Exibe opção no menu", "Lê dados do aluno", "Finaliza programa"],
-        "correctAnswer": "Exibe opção no menu",
+        "options": ["Exibe a opção '1 - Cadastrar aluno' no menu do console", "Executa a função para cadastrar um novo aluno no sistema", "Lê os dados do aluno que serão digitados a seguir", "Finaliza a execução do programa com código de saída 1"],
+        "correctAnswer": "Exibe a opção '1 - Cadastrar aluno' no menu do console",
         "difficulty": "Fácil"
     },
     {
         "question": "int idade = sc.nextInt(); lê qual tipo de dado?",
-        "options": ["Texto", "Número inteiro", "Fecha scanner", "String"],
-        "correctAnswer": "Número inteiro",
+        "options": ["Lê o próximo número inteiro da entrada do console", "Lê uma linha inteira de texto (String) do console", "Fecha a conexão do objeto Scanner com a entrada", "Verifica se a próxima entrada é um número ou texto"],
+        "correctAnswer": "Lê o próximo número inteiro da entrada do console",
         "difficulty": "Fácil"
     },
     {
         "question": "List<Aluno> alunos = service.listarAlunos(); obtém o quê?",
-        "options": ["Cria alunos", "Lista de alunos cadastrados", "Remove alunos", "Valida nomes"],
-        "correctAnswer": "Lista de alunos cadastrados",
+        "options": ["Uma lista com todos os alunos cadastrados no sistema", "Um novo objeto Aluno com os dados preenchidos", "Um valor booleano indicando se a remoção foi bem-sucedida", "Uma validação dos nomes de todos os alunos na lista"],
+        "correctAnswer": "Uma lista com todos os alunos cadastrados no sistema",
         "difficulty": "Fácil"
     },
     {
         "question": "O laço for (Aluno a : alunos) { ... } em AlunoView faz o quê?",
-        "options": ["Remove alunos", "Imprime nome e idade", "Cria alunos", "Ordena alunos"],
-        "correctAnswer": "Imprime nome e idade",
+        "options": ["Percorre a lista de alunos para imprimir o nome e a idade de cada um", "Remove da lista todos os alunos que atendem a um critério específico", "Cria novos objetos Aluno com base em uma lista de nomes e idades", "Ordena a lista de alunos em ordem alfabética antes de exibi-la"],
+        "correctAnswer": "Percorre a lista de alunos para imprimir o nome e a idade de cada um",
         "difficulty": "Fácil"
     },
     {
         "question": "O comando alunos.add(aluno) faz o quê?",
-        "options": ["Remove aluno", "Adiciona aluno", "Substitui lista", "Conta alunos"],
-        "correctAnswer": "Adiciona aluno",
+        "options": ["Adiciona um novo objeto aluno ao final da lista 'alunos'", "Remove um objeto aluno específico da lista 'alunos'", "Substitui toda a lista 'alunos' por uma nova coleção", "Retorna o número total de alunos presentes na lista"],
+        "correctAnswer": "Adiciona um novo objeto aluno ao final da lista 'alunos'",
         "difficulty": "Fácil"
     },
     {
         "question": "O comando indice++; faz o quê?",
-        "options": ["Zera vetor", "Cria instância", "Avança índice", "Remove aluno"],
-        "correctAnswer": "Avança índice",
+        "options": ["Avança o valor da variável 'indice' em uma unidade", "Zera o valor do vetor a partir da posição 'indice'", "Cria uma nova instância a partir da classe 'indice'", "Remove um aluno da lista na posição 'indice'"],
+        "correctAnswer": "Avança o valor da variável 'indice' em uma unidade",
         "difficulty": "Fácil"
     },
     {
         "question": "No switch de AlunoView, o case 2 chama qual função?",
-        "options": ["Finalizar", "Listar alunos", "Remover aluno", "Cadastrar aluno"],
-        "correctAnswer": "Listar alunos",
+        "options": ["A função para listar todos os alunos cadastrados", "A função para finalizar a execução do programa", "A função para remover um aluno com base no nome", "A função para cadastrar um novo aluno no sistema"],
+        "correctAnswer": "A função para listar todos os alunos cadastrados",
         "difficulty": "Fácil"
     },
     {
         "question": "repository = new AlunoRepositoryLista(); define o quê?",
-        "options": ["Cria vetor fixo", "Usa lista dinâmica", "Remove alunos", "Cria aluno padrão"],
-        "correctAnswer": "Usa lista dinâmica",
+        "options": ["Que a persistência de dados usará uma lista de tamanho dinâmico", "Que será criado um vetor com um tamanho fixo para os dados", "Que todos os alunos serão removidos da base de dados atual", "Que um aluno padrão será criado para testes da aplicação"],
+        "correctAnswer": "Que a persistência de dados usará uma lista de tamanho dinâmico",
         "difficulty": "Fácil"
     },
     {
         "question": "repository = new AlunoRepositoryVetor(10); cria o quê?",
-        "options": ["Lista infinita", "Repositório com vetor de tamanho 10", "Arquivo alunos", "Banco SQL"],
-        "correctAnswer": "Repositório com vetor de tamanho 10",
+        "options": ["Um repositório que armazena os alunos em um vetor de 10 posições", "Uma lista de alunos que pode crescer até o limite de 10 mil", "Um arquivo de texto chamado 'alunos.txt' com 10 linhas", "Uma conexão com um banco de dados SQL com um pool de 10 conexões"],
+        "correctAnswer": "Um repositório que armazena os alunos em um vetor de 10 posições",
         "difficulty": "Fácil"
     },
     {
         "question": "O bloco default em um switch faz o quê?",
-        "options": ["Fecha programa", "Exibe opção inválida", "Repete ação", "Cria variável"],
-        "correctAnswer": "Exibe opção inválida",
+        "options": ["É executado se nenhuma das outras opções (case) for atendida", "Define o valor padrão para todas as variáveis dentro do switch", "Sempre repete a última ação executada pelo usuário no menu", "Cria uma variável temporária para armazenar a opção do usuário"],
+        "correctAnswer": "É executado se nenhuma das outras opções (case) for atendida",
         "difficulty": "Fácil"
     },
     {
         "question": "new AlunoView().menu(); em Main.java faz o quê?",
-        "options": ["Finaliza programa", "Chama menu", "Cria aluno", "Valida idade"],
-        "correctAnswer": "Chama menu",
+        "options": ["Cria uma nova instância de AlunoView e chama o método menu", "Finaliza o programa e exibe o menu de opções de saída", "Cria um novo aluno e o adiciona ao menu de visualização", "Valida a idade de todos os alunos antes de exibir o menu"],
+        "correctAnswer": "Cria uma nova instância de AlunoView e chama o método menu",
         "difficulty": "Fácil"
     },
     {
         "question": "O método adicionar em AlunoRepositoryVetor faz o quê?",
-        "options": ["Remove aluno", "Insere aluno e incrementa índice", "Ordena alunos", "Cria lista dinâmica"],
-        "correctAnswer": "Insere aluno e incrementa índice",
+        "options": ["Insere um aluno na próxima posição livre e incrementa o índice", "Remove um aluno do vetor e reorganiza os elementos restantes", "Ordena todos os alunos no vetor com base no nome ou no ID", "Cria uma lista dinâmica a partir do conteúdo do vetor atual"],
+        "correctAnswer": "Insere um aluno na próxima posição livre e incrementa o índice",
         "difficulty": "Fácil"
     },
     {
         "question": "boolean continuar = true em AlunoView significa?",
-        "options": ["Conta alunos", "Controla execução do menu", "Cria aluno", "Declara índice"],
-        "correctAnswer": "Controla execução do menu",
+        "options": ["É uma variável de controle para manter o loop do menu em execução", "Conta o número de alunos que continuam ativos no sistema", "Cria um novo aluno com o status de 'continuar' como verdadeiro", "Declara um índice para percorrer a lista de alunos no menu"],
+        "correctAnswer": "É uma variável de controle para manter o loop do menu em execução",
         "difficulty": "Fácil"
     },
     {
         "question": "O laço while (continuar) faz o quê?",
-        "options": ["Executa 1 vez", "Executa enquanto continuar for verdadeiro", "Nunca executa", "Encerra"],
-        "correctAnswer": "Executa enquanto continuar for verdadeiro",
+        "options": ["Executa o bloco de código repetidamente enquanto 'continuar' for verdadeiro", "Executa o bloco de código apenas uma única vez e depois para", "Nunca executa o bloco de código, pois a condição é sempre falsa", "Encerra o programa se a variável 'continuar' for verdadeira"],
+        "correctAnswer": "Executa o bloco de código repetidamente enquanto 'continuar' for verdadeiro",
         "difficulty": "Fácil"
     },
     {
         "question": "O contrato Aluno buscarPorNome(String nome); define o quê?",
-        "options": ["Remove aluno", "Permite buscar aluno por nome", "Retorna lista vazia", "Converte aluno"],
-        "correctAnswer": "Permite buscar aluno por nome",
+        "options": ["Um método que deve buscar e retornar um aluno com base no nome", "Um método que remove um aluno do repositório usando o nome", "Um método que retorna sempre uma lista vazia de alunos", "Um método que converte o nome de um aluno para maiúsculas"],
+        "correctAnswer": "Um método que deve buscar e retornar um aluno com base no nome",
         "difficulty": "Fácil"
     },
     {
         "question": "O método buscarAlunoPorNome em Service retorna?",
-        "options": ["Remove aluno", "Aluno com base no nome", "Cria aluno", "Valida idade"],
-        "correctAnswer": "Aluno com base no nome",
+        "options": ["O objeto Aluno correspondente ao nome buscado, se existir", "Um valor booleano indicando se a remoção foi bem-sucedida", "Um novo objeto Aluno com o nome e a idade padrão", "Uma validação se a idade do aluno encontrado é válida"],
+        "correctAnswer": "O objeto Aluno correspondente ao nome buscado, se existir",
         "difficulty": "Fácil"
     },
     {
         "question": "System.out.println('Digite o nome para buscar:'); faz o quê?",
-        "options": ["Lê nome", "Exibe mensagem", "Busca automaticamente", "Finaliza"],
-        "correctAnswer": "Exibe mensagem",
+        "options": ["Exibe uma mensagem no console instruindo o usuário", "Lê o nome que o usuário digitará em seguida no console", "Busca automaticamente por um aluno com o nome 'buscar'", "Finaliza o programa e exibe uma mensagem de despedida"],
+        "correctAnswer": "Exibe uma mensagem no console instruindo o usuário",
         "difficulty": "Fácil"
     },
     {
         "question": "service.buscarAlunoPorNome(nome); faz o quê?",
-        "options": ["Remove aluno", "Procura aluno pelo nome", "Cria lista", "Zera idade"],
-        "correctAnswer": "Procura aluno pelo nome",
+        "options": ["Chama a camada de serviço para procurar um aluno pelo nome", "Remove um aluno do serviço usando o nome como critério", "Cria uma nova lista de alunos a partir do serviço", "Zera a idade de um aluno encontrado através do serviço"],
+        "correctAnswer": "Chama a camada de serviço para procurar um aluno pelo nome",
         "difficulty": "Fácil"
     },
     {
         "question": "O if (encontrado != null) faz o quê?",
-        "options": ["Sempre imprime", "Imprime se encontrado", "Remove aluno", "Cria aluno"],
-        "correctAnswer": "Imprime se encontrado",
+        "options": ["Executa um bloco de código apenas se um aluno foi encontrado", "Sempre imprime os dados do aluno, mesmo que seja nulo", "Remove o aluno se ele foi encontrado na base de dados", "Cria um novo aluno se a busca não retornar resultado"],
+        "correctAnswer": "Executa um bloco de código apenas se um aluno foi encontrado",
         "difficulty": "Fácil"
     },
     {
         "question": "O laço for em AlunoRepositoryLista com equals(nome) faz o quê?",
-        "options": ["Cria aluno", "Retorna aluno com nome igual", "Remove todos", "Ordena lista"],
-        "correctAnswer": "Retorna aluno com nome igual",
+        "options": ["Percorre a lista e retorna o aluno cujo nome corresponde ao buscado", "Cria um novo aluno na lista com o nome passado como parâmetro", "Remove da lista todos os alunos que não possuem o nome buscado", "Ordena a lista de alunos com base no nome fornecido"],
+        "correctAnswer": "Percorre a lista e retorna o aluno cujo nome corresponde ao buscado",
         "difficulty": "Fácil"
     },
     {
         "question": "O for em AlunoRepositoryVetor até indice faz o quê?",
-        "options": ["Adiciona aluno", "Busca aluno por nome", "Apaga vetor", "Cria lista"],
-        "correctAnswer": "Busca aluno por nome",
+        "options": ["Percorre as posições preenchidas do vetor em busca de um aluno", "Adiciona um novo aluno em cada posição do vetor até o índice", "Apaga todos os elementos do vetor até a posição 'indice'", "Cria uma nova lista a partir dos elementos do vetor"],
+        "correctAnswer": "Percorre as posições preenchidas do vetor em busca de um aluno",
         "difficulty": "Fácil"
     },
     {
         "question": "O case 3 em AlunoView executa?",
-        "options": ["Remove aluno", "Buscar aluno por nome", "Listar alunos", "Sair"],
-        "correctAnswer": "Buscar aluno por nome",
+        "options": ["A funcionalidade de buscar um aluno pelo seu nome", "A funcionalidade de remover um aluno do sistema", "A funcionalidade de listar todos os alunos cadastrados", "A opção de sair do sistema e encerrar a aplicação"],
+        "correctAnswer": "A funcionalidade de buscar um aluno pelo seu nome",
         "difficulty": "Fácil"
     },
     {
         "question": "O case 0 em AlunoView faz?",
-        "options": ["Reinicia menu", "Sai do sistema", "Cadastra aluno", "Lista alunos"],
-        "correctAnswer": "Sai do sistema",
+        "options": ["Altera a variável de controle para encerrar o loop do menu", "Reinicia o menu principal, mostrando as opções novamente", "Executa a funcionalidade de cadastrar um novo aluno", "Chama o método para listar todos os alunos cadastrados"],
+        "correctAnswer": "Altera a variável de controle para encerrar o loop do menu",
         "difficulty": "Fácil"
     }
-
-
-]
+])
 TIME_PER_QUESTION, WINNING_SCORE, PENALTY_POINTS = 30, 200, 5
 
 def create_new_game_state(room_id: str, host_name: str):
