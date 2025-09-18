@@ -1018,7 +1018,7 @@ default_questions = [
 
 
 ]
-TIME_PER_QUESTION, WINNING_SCORE, PENALTY_POINTS = 30, 100, 5
+TIME_PER_QUESTION, WINNING_SCORE, PENALTY_POINTS = 30, 200, 5
 
 def create_new_game_state(room_id: str, host_name: str):
     if room_id not in game_states:
