@@ -806,7 +806,217 @@ default_questions = [
         "options": ["Removeria todas as ocorrências que correspondem à condição", "Removeria apenas a primeira ocorrência", "Lançaria uma 'IllegalStateException'", "Entraria em um loop infinito"],
         "correctAnswer": "Removeria todas as ocorrências que correspondem à condição",
         "difficulty": "Extremamente Difícil"
+    },
+    {
+        "question": "Qual é o nome da classe que representa o modelo de um aluno?",
+        "options": ["Aluno.java", "AlunoService.java", "AlunoView.java", "AlunoModel.java"],
+        "correctAnswer": "Aluno.java",
+        "difficulty": "Fácil"
+    },
+    {
+        "question": "Para que serve a anotação @Override?",
+        "options": ["Indica que um método está sendo sobrescrito", "Indica um método obsoleto", "Inicia um novo método", "Importa uma biblioteca"],
+        "correctAnswer": "Indica que um método está sendo sobrescrito",
+        "difficulty": "Fácil"
+    },
+    {
+        "question": "Qual classe é responsável pela interface e interação com o usuário no console?",
+        "options": ["AlunoView", "AlunoService", "Main", "AlunoRepository"],
+        "correctAnswer": "AlunoView",
+        "difficulty": "Fácil"
+    },
+    {
+        "question": "No menu principal em AlunoView, qual número o usuário deve digitar para sair do sistema?",
+        "options": ["0", "1", "9", "-1"],
+        "correctAnswer": "0",
+        "difficulty": "Fácil"
+    },
+
+    # =================================================================
+    # == QUESTÕES EXTRAS (31–60) ==
+    # =================================================================
+    {
+        "question": "O que o método getIdade() em Aluno.java retorna?",
+        "options": ["Define a idade do aluno", "Retorna a idade do aluno", "Cria uma variável idade", "Converte idade em String"],
+        "correctAnswer": "Retorna a idade do aluno",
+        "difficulty": "Fácil"
+    },
+    {
+        "question": "No trecho this.nome = nome; o que o 'this' representa?",
+        "options": ["Cria novos objetos", "Refere-se ao atributo da classe atual", "Importa bibliotecas externas", "Remove valor de nome"],
+        "correctAnswer": "Refere-se ao atributo da classe atual",
+        "difficulty": "Fácil"
+    },
+    {
+        "question": "Qual o papel da anotação @Override em um método de repositório?",
+        "options": ["Define uma constante", "Sobrescreve um método da interface", "Cria método vazio automaticamente", "Executa de forma assíncrona"],
+        "correctAnswer": "Sobrescreve um método da interface",
+        "difficulty": "Fácil"
+    },
+    {
+        "question": "O construtor AlunoRepositoryVetor(int tamanho) faz o quê?",
+        "options": ["Cria lista dinâmica", "Inicializa vetor de tamanho fixo", "Converte alunos em String", "Gera IDs automáticos"],
+        "correctAnswer": "Inicializa vetor de tamanho fixo",
+        "difficulty": "Fácil"
+    },
+    {
+        "question": "O atributo private int indice = 0 em AlunoRepositoryVetor serve para?",
+        "options": ["Guardar idade", "Definir máximo do vetor", "Controlar posição de inserção", "Contar alunos aprovados"],
+        "correctAnswer": "Controlar posição de inserção",
+        "difficulty": "Fácil"
+    },
+    {
+        "question": "O que acontece se o nome não for válido em AlunoService?",
+        "options": ["Adiciona aluno sempre", "Não adiciona aluno", "Remove aluno inválido", "Ordena alunos"],
+        "correctAnswer": "Não adiciona aluno",
+        "difficulty": "Fácil"
+    },
+    {
+        "question": "O que verifica !nome.trim().isEmpty() no Validador?",
+        "options": ["Nome é numérico", "Nome não está vazio", "Nome é nulo", "Nome contém números"],
+        "correctAnswer": "Nome não está vazio",
+        "difficulty": "Fácil"
+    },
+    {
+        "question": "System.out.println('1 - Cadastrar aluno'); em AlunoView faz o quê?",
+        "options": ["Cadastra aluno", "Exibe opção no menu", "Lê dados do aluno", "Finaliza programa"],
+        "correctAnswer": "Exibe opção no menu",
+        "difficulty": "Fácil"
+    },
+    {
+        "question": "int idade = sc.nextInt(); lê qual tipo de dado?",
+        "options": ["Texto", "Número inteiro", "Fecha scanner", "String"],
+        "correctAnswer": "Número inteiro",
+        "difficulty": "Fácil"
+    },
+    {
+        "question": "List<Aluno> alunos = service.listarAlunos(); obtém o quê?",
+        "options": ["Cria alunos", "Lista de alunos cadastrados", "Remove alunos", "Valida nomes"],
+        "correctAnswer": "Lista de alunos cadastrados",
+        "difficulty": "Fácil"
+    },
+    {
+        "question": "O laço for (Aluno a : alunos) { ... } em AlunoView faz o quê?",
+        "options": ["Remove alunos", "Imprime nome e idade", "Cria alunos", "Ordena alunos"],
+        "correctAnswer": "Imprime nome e idade",
+        "difficulty": "Fácil"
+    },
+    {
+        "question": "O comando alunos.add(aluno) faz o quê?",
+        "options": ["Remove aluno", "Adiciona aluno", "Substitui lista", "Conta alunos"],
+        "correctAnswer": "Adiciona aluno",
+        "difficulty": "Fácil"
+    },
+    {
+        "question": "O comando indice++; faz o quê?",
+        "options": ["Zera vetor", "Cria instância", "Avança índice", "Remove aluno"],
+        "correctAnswer": "Avança índice",
+        "difficulty": "Fácil"
+    },
+    {
+        "question": "No switch de AlunoView, o case 2 chama qual função?",
+        "options": ["Finalizar", "Listar alunos", "Remover aluno", "Cadastrar aluno"],
+        "correctAnswer": "Listar alunos",
+        "difficulty": "Fácil"
+    },
+    {
+        "question": "repository = new AlunoRepositoryLista(); define o quê?",
+        "options": ["Cria vetor fixo", "Usa lista dinâmica", "Remove alunos", "Cria aluno padrão"],
+        "correctAnswer": "Usa lista dinâmica",
+        "difficulty": "Fácil"
+    },
+    {
+        "question": "repository = new AlunoRepositoryVetor(10); cria o quê?",
+        "options": ["Lista infinita", "Repositório com vetor de tamanho 10", "Arquivo alunos", "Banco SQL"],
+        "correctAnswer": "Repositório com vetor de tamanho 10",
+        "difficulty": "Fácil"
+    },
+    {
+        "question": "O bloco default em um switch faz o quê?",
+        "options": ["Fecha programa", "Exibe opção inválida", "Repete ação", "Cria variável"],
+        "correctAnswer": "Exibe opção inválida",
+        "difficulty": "Fácil"
+    },
+    {
+        "question": "new AlunoView().menu(); em Main.java faz o quê?",
+        "options": ["Finaliza programa", "Chama menu", "Cria aluno", "Valida idade"],
+        "correctAnswer": "Chama menu",
+        "difficulty": "Fácil"
+    },
+    {
+        "question": "O método adicionar em AlunoRepositoryVetor faz o quê?",
+        "options": ["Remove aluno", "Insere aluno e incrementa índice", "Ordena alunos", "Cria lista dinâmica"],
+        "correctAnswer": "Insere aluno e incrementa índice",
+        "difficulty": "Fácil"
+    },
+    {
+        "question": "boolean continuar = true em AlunoView significa?",
+        "options": ["Conta alunos", "Controla execução do menu", "Cria aluno", "Declara índice"],
+        "correctAnswer": "Controla execução do menu",
+        "difficulty": "Fácil"
+    },
+    {
+        "question": "O laço while (continuar) faz o quê?",
+        "options": ["Executa 1 vez", "Executa enquanto continuar for verdadeiro", "Nunca executa", "Encerra"],
+        "correctAnswer": "Executa enquanto continuar for verdadeiro",
+        "difficulty": "Fácil"
+    },
+    {
+        "question": "O contrato Aluno buscarPorNome(String nome); define o quê?",
+        "options": ["Remove aluno", "Permite buscar aluno por nome", "Retorna lista vazia", "Converte aluno"],
+        "correctAnswer": "Permite buscar aluno por nome",
+        "difficulty": "Fácil"
+    },
+    {
+        "question": "O método buscarAlunoPorNome em Service retorna?",
+        "options": ["Remove aluno", "Aluno com base no nome", "Cria aluno", "Valida idade"],
+        "correctAnswer": "Aluno com base no nome",
+        "difficulty": "Fácil"
+    },
+    {
+        "question": "System.out.println('Digite o nome para buscar:'); faz o quê?",
+        "options": ["Lê nome", "Exibe mensagem", "Busca automaticamente", "Finaliza"],
+        "correctAnswer": "Exibe mensagem",
+        "difficulty": "Fácil"
+    },
+    {
+        "question": "service.buscarAlunoPorNome(nome); faz o quê?",
+        "options": ["Remove aluno", "Procura aluno pelo nome", "Cria lista", "Zera idade"],
+        "correctAnswer": "Procura aluno pelo nome",
+        "difficulty": "Fácil"
+    },
+    {
+        "question": "O if (encontrado != null) faz o quê?",
+        "options": ["Sempre imprime", "Imprime se encontrado", "Remove aluno", "Cria aluno"],
+        "correctAnswer": "Imprime se encontrado",
+        "difficulty": "Fácil"
+    },
+    {
+        "question": "O laço for em AlunoRepositoryLista com equals(nome) faz o quê?",
+        "options": ["Cria aluno", "Retorna aluno com nome igual", "Remove todos", "Ordena lista"],
+        "correctAnswer": "Retorna aluno com nome igual",
+        "difficulty": "Fácil"
+    },
+    {
+        "question": "O for em AlunoRepositoryVetor até indice faz o quê?",
+        "options": ["Adiciona aluno", "Busca aluno por nome", "Apaga vetor", "Cria lista"],
+        "correctAnswer": "Busca aluno por nome",
+        "difficulty": "Fácil"
+    },
+    {
+        "question": "O case 3 em AlunoView executa?",
+        "options": ["Remove aluno", "Buscar aluno por nome", "Listar alunos", "Sair"],
+        "correctAnswer": "Buscar aluno por nome",
+        "difficulty": "Fácil"
+    },
+    {
+        "question": "O case 0 em AlunoView faz?",
+        "options": ["Reinicia menu", "Sai do sistema", "Cadastra aluno", "Lista alunos"],
+        "correctAnswer": "Sai do sistema",
+        "difficulty": "Fácil"
     }
+
+
 ]
 TIME_PER_QUESTION, WINNING_SCORE, PENALTY_POINTS = 30, 100, 5
 
