@@ -203,7 +203,12 @@
         </div>
         <div id="editor-screen" class="screen">
             <h2>Editor de Perguntas</h2>
-            <div class="form-group"><label for="editor-player-name">Seu Nome de Criador</label><input type="text" id="editor-player-name" placeholder="Digite seu nome e pressione Enter"></div><hr>
+            <div class="form-group">
+                <label for="editor-player-name">Seu Nome de Criador</label>
+                <input type="text" id="editor-player-name" placeholder="Digite seu nome para começar">
+                <button id="confirm-creator-btn" class="btn btn-primary btn-full" style="margin-top: 10px;">Confirmar Nome e Carregar Perguntas</button>
+            </div>
+            <hr>
             <h3>Minhas Perguntas Salvas</h3>
             <ul id="my-questions-list"></ul><hr>
             <h3>Adicionar / Editar Pergunta</h3>
@@ -421,6 +426,16 @@ document.addEventListener('DOMContentLoaded', () => {
         switchScreen('gameOver');
     }
 
+    function confirmCreatorName() {
+        creatorName = editorPlayerNameInput.value.trim(); 
+        if (creatorName) { 
+            editorPlayerNameInput.disabled = true;
+            // Esconde o botão de confirmar nome após o uso
+            document.getElementById('confirm-creator-btn').style.display = 'none'; 
+            loadPlayerQuestions(creatorName); 
+        }
+    }    
+
     function startConfetti() {
         const canvas = document.getElementById('confetti-canvas');
         if (!canvas) return;
@@ -544,6 +559,7 @@ document.addEventListener('DOMContentLoaded', () => {
     rankingModal.addEventListener('click', (e) => { if (e.target === rankingModal) { rankingModal.classList.remove('visible'); } });
     editorPlayerNameInput.addEventListener('keypress', (e) => {
         if (e.key === 'Enter') { 
+            confirmCreatorName();
             creatorName = editorPlayerNameInput.value.trim(); 
             if (creatorName) { 
                 editorPlayerNameInput.disabled = true; 
@@ -584,6 +600,8 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log("Ícone de som clicado!"); // Linha de teste
         playSound(soundVictory);
     });
+    const confirmCreatorBtn = document.getElementById('confirm-creator-btn');
+    confirmCreatorBtn.addEventListener('click', confirmCreatorName);
 });
 </script>
 </body>
